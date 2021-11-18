@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentLoginBinding
@@ -64,6 +65,7 @@ class LoginFragment : Fragment() {
                 startActivity(appActivityIntent)
             }
             Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
+                Toast.makeText(context,"Bad email/password, try again", Toast.LENGTH_SHORT).show();
             }
         }
     }
