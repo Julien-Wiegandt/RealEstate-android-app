@@ -17,6 +17,12 @@ import com.example.projetinf717.databinding.FragmentLoginBinding
 import com.example.projetinf717.ui.home.HomeViewModel
 import androidx.annotation.NonNull
 import com.example.projetinf717.AppActivity
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
+
+
+
 
 
 class LoginFragment : Fragment() {
@@ -61,6 +67,11 @@ class LoginFragment : Fragment() {
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.SHOW_WELCOME -> {
+                val jwt = loginViewModel.jwt
+                val sharedPreferences: SharedPreferences =
+                    requireActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                val myEdit = sharedPreferences.edit()
+                myEdit.putString("jwt", jwt.toString());
                 val appActivityIntent = Intent(activity, AppActivity::class.java)
                 startActivity(appActivityIntent)
             }
@@ -69,6 +80,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
 
 
 

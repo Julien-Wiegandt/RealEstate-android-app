@@ -9,7 +9,7 @@ class LoginViewModel : ViewModel() {
         value = "This is login Fragment"
     }
     val text: LiveData<String> = _text
-
+    val jwt = null
     //Stores actions for view.
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
 
