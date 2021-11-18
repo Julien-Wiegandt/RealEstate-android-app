@@ -11,14 +11,14 @@ import kotlin.random.Random
 
 class Application : Application() {
     companion object{
-
-
-        var IP = "192.168.5.164"
-        private var idNotifsParis : Int = 1000
+        var IP = "localhost"
+        var JWT: String? = null
+        var appContext: Context? = null
+        private var idNotifs : Int = 1000
 
         fun getIdNotifParis()  : Int{
-            idNotifsParis += 1
-            return idNotifsParis
+            idNotifs += 1
+            return idNotifs
         }
         private var ID : String? = null
         private fun generateID() : String{
@@ -56,6 +56,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        appContext = applicationContext
         createNotificationChannel()
         val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
         startService(serviceIntent)

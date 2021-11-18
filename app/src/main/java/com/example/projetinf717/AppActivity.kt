@@ -32,4 +32,14 @@ class AppActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    override fun onResume() {
+        super.onResume()
+        Application.activityResumed()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Application.activityPaused()
+    }
 }
