@@ -11,21 +11,12 @@
         android:id="@+id/tv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="64dp"
         android:text="@string/register"
         android:textAlignment="center"
-        android:textSize="50sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="60dp"/>
-
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tag"
-        android:textSize="17sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"/>
+        android:textSize="50sp" />
 
     <EditText
         android:id="@+id/et_name"
@@ -34,7 +25,7 @@
         android:hint="@string/your_name"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:padding="15dp"
         android:inputType="textPersonName"
         android:background="@drawable/et_custom"
@@ -47,7 +38,7 @@
         android:hint="@string/e_mail"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:padding="15dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/et_custom"
@@ -60,7 +51,7 @@
         android:hint="@string/password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:padding="15dp"
         android:inputType="textPassword"
         android:background="@drawable/et_custom"
@@ -72,7 +63,7 @@
         android:layout_height="50dp"
         android:hint="@string/re_type_password"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="16dp"
         android:padding="15dp"
         android:inputType="textPassword"
         android:background="@drawable/et_custom"
@@ -87,13 +78,13 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_custom"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
-            android:text="@string/register"/>
+            android:background="@drawable/btn_custom"
+            android:text="@string/register"
+            android:textColor="@android:color/white" />
 
         <ImageView
             android:layout_width="30dp"
@@ -108,6 +99,7 @@
             android:layout_height="wrap_content"
             android:text="@string/swipe_right_for_login"
             android:textSize="15sp"
+            android:textColor="@color/colorPrimaryVariant"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"/>
