@@ -9,33 +9,26 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/app_name"
         android:textSize="50sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/tv_subtitle"/>
-
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tag"
-        android:textSize="17sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"
-        android:layout_above="@id/et_email"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/e_mail"
+        android:layout_above="@id/et_password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="15dp"
-        android:inputType="textEmailAddress"
-        android:layout_above="@id/et_password"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/et_custom"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:text="admin"
         android:textSize="15sp" />
 
     <EditText
@@ -43,9 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/password"
+        android:text="2121"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
         android:padding="15dp"
         android:inputType="textPassword"
         android:layout_centerInParent="true"
@@ -75,6 +70,7 @@
         android:id="@+id/swipeRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryVariant"
         android:text="@string/swipe_left_for_register"
         android:textSize="15sp"
         android:layout_centerHorizontal="true"
