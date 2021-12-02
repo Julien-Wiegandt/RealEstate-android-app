@@ -40,9 +40,11 @@
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_home.xml" value="0.223731884057971" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_login.xml" value="0.2" />
-        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_notifications.xml" value="0.264" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/rounded_button.xml" value="0.2359375" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/menu/agency.xml" value="0.25" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/menu/agency_bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/menu/bottom_nav_menu.xml" value="0.12708333333333333" />
       </map>
     </option>

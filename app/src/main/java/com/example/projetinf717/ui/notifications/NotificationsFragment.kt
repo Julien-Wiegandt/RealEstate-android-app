@@ -1,5 +1,6 @@
 package com.example.projetinf717.ui.notifications
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.projetinf717.R
+import com.example.projetinf717.databinding.ActivityAppBinding
 import com.example.projetinf717.databinding.FragmentNotificationsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NotificationsFragment : Fragment() {
 
@@ -31,10 +38,18 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        binding.profileSwitchAgency.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked){
+                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)
+            }else{
+                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
+            }
+        }
+
+//        val textView: TextView = binding.textNotifications
+//        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 

@@ -31,6 +31,10 @@
     <string name="editTextEmailHint">Contact email</string>
     <string name="editTextPhoneHint">Contact phone</string>createAdsButton
     <string name="createAdsButton">Create</string>
+    <!-- profile strings -->
+    <string name="profileImageContentDescription">Your profile</string>
+    <string name="profileAgencySwicth">Agency</string>
+    <string name="profileUpdatePasswordButton">Update password</string>
 
 
     <string name="channel_name">Notifications</string>
