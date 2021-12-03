@@ -19,15 +19,21 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun userWantToRegister(name: String, mail: String, password: String, repassword: String ) {
-        val cb: VolleyCallback = object: VolleyCallback {
-            override fun onSuccess(result: JSONObject?) {
-                showUserRegistered()
+        if(password != repassword){
+            showPasswordsNotCorresponding()
+        }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
+            showBadMail()
+        }else{
+            val cb: VolleyCallback = object: VolleyCallback {
+                override fun onSuccess(result: JSONObject?) {
+                    showUserRegistered()
+                }
+                override fun onError() {
+                    showInvalidArguments()
+                }
             }
-            override fun onError() {
-                showInvalidArguments()
-            }
+            authentication.register(name,mail,password,repassword, cb)
         }
-        authentication.register(name,mail,password,repassword, cb)
 
     }
 
@@ -37,12 +43,20 @@ class RegisterViewModel : ViewModel() {
     private fun showUserRegistered() {
         mAction.value = Action(Action.REGISTERED)
     }
+    private fun showPasswordsNotCorresponding() {
+        mAction.value = Action(Action.PASSWORDS_DOES_NOT_CORRESPOND)
+    }
+    private fun showBadMail() {
+        mAction.value = Action(Action.INVALID_MAIL)
+    }
 }
 
 class Action(val value: Int) {
 
     companion object {
         const val REGISTERED = 0
-        const val INVALID_ARGUMENTS = 1
+        const val INVALID_MAIL = 1
+        const val PASSWORDS_DOES_NOT_CORRESPOND = 2
+        const val INVALID_ARGUMENTS = 3
     }
 }

@@ -84,6 +84,16 @@ class RegisterFragment : Fragment() {
         when (action.value) {
             Action.REGISTERED -> {
                 Toast.makeText(context,"Account created", Toast.LENGTH_SHORT).show();
+                name.setText("")
+                mail.setText("")
+                password.setText("")
+                repassword.setText("")
+            }
+            Action.INVALID_MAIL ->{
+                Toast.makeText(context,"Bad mail address", Toast.LENGTH_SHORT).show();
+            }
+            Action.PASSWORDS_DOES_NOT_CORRESPOND -> {
+                Toast.makeText(context,"Passwords must correspond", Toast.LENGTH_SHORT).show();
             }
             Action.INVALID_ARGUMENTS -> {
                 Toast.makeText(context,"Bad arguments try again", Toast.LENGTH_SHORT).show();
