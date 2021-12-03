@@ -39,4 +39,5 @@
 
     <string name="channel_name">Notifications</string>
     <string name="channel_description">rien</string>
+    <string name="se_deconnecter">Se déconnecter</string>
 </resources>

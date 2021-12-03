@@ -63,21 +63,22 @@ class LoginFragment : Fragment() {
         return root
     }
     private fun handleAction(action: Action) {
-//        when (action.value) {
-//            Action.SHOW_WELCOME -> {
-//                val jwt = Application.JWT
-//                val sharedPreferences: SharedPreferences =
-//                    requireActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE)
-//                val myEdit = sharedPreferences.edit()
-//                myEdit.putString("jwt", jwt.toString())
-//                myEdit.apply()
+        when (action.value) {
+            Action.SHOW_WELCOME -> {
+                val jwt = Application.JWT
+                val sharedPreferences: SharedPreferences =
+                    requireActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                val myEdit = sharedPreferences.edit()
+                myEdit.putString("jwt", jwt.toString())
+                myEdit.apply()
                 val appActivityIntent = Intent(activity, AppActivity::class.java)
                 startActivity(appActivityIntent)
-//            }
-//            Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
-//                Toast.makeText(context,"Bad email/password, try again", Toast.LENGTH_SHORT).show();
-//            }
-//        }
+                activity?.finish()
+            }
+            Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
+                Toast.makeText(context,"Bad email/password, try again", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 

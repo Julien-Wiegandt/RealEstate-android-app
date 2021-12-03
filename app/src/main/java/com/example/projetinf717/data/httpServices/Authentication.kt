@@ -16,18 +16,20 @@ import android.R
 class Authentication() {
 
     private val queue = Volley.newRequestQueue(Application.appContext)
-    private val url = "http://"+ Application.IP+":3000/"
+    private val urlLogin = "http://"+ Application.IP+"/auth/login"
+    private val urlRegister = "http://"+ Application.IP+"/auth/register"
 
     fun login(mail: String, password: String, callback: VolleyCallback){
         val jsonObject = JSONObject()
         jsonObject.put("mail",mail)
         jsonObject.put("password",password)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, url + "login", jsonObject,
+            Request.Method.POST, urlLogin, jsonObject,
             { response ->
                 callback.onSuccess(response)
             },
-            {
+            {err ->
+                println(err)
                 callback.onError()
             })
         queue.add(jsonRequest)
@@ -44,11 +46,12 @@ class Authentication() {
         jsonObject.put("repassword",repassword)
         println(name)
         val jsonRequest = JsonObjectRequest(
-            Request.Method.POST, url + "register", jsonObject,
+            Request.Method.POST, urlRegister, jsonObject,
             { response ->
                 callback.onSuccess(response)
             },
-            {
+            { err ->
+                println(err)
                 callback.onError()
             })
         queue.add(jsonRequest)

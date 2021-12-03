@@ -37,15 +37,16 @@ class MainActivity : AppCompatActivity() {
             applicationContext.getSharedPreferences("MySharedPref", MODE_PRIVATE)
         val token : String? = sharedPreferences.getString("jwt", null)
         // Crash my app (JulienW)
-//        if(token !== null){
-//            Application.JWT = token
-//            val jwt = JWT(token)
-//            val isExpired: Boolean = jwt.isExpired(10) // 10 seconds leeway
-//            if(!isExpired){
-//                val appActivityIntent = Intent(applicationContext, AppActivity::class.java)
-//                startActivity(appActivityIntent)
-//            }
-//        }
+        if(token !== null){
+            Application.JWT = token
+            val jwt = JWT(token)
+            val isExpired: Boolean = jwt.isExpired(10) // 10 seconds leeway
+            if(!isExpired){
+                val appActivityIntent = Intent(applicationContext, AppActivity::class.java)
+                startActivity(appActivityIntent)
+                this.finish()
+            }
+        }
     }
 
     class AuthenticationStateAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
