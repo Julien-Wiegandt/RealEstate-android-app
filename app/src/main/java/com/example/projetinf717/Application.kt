@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class Application : Application() {
     companion object{
-        var IP = "10.238.67.214:3000/api"
+        var IP = "192.168.0.27:3000/api"
         var JWT: String? = null
         var appContext: Context? = null
         private var idNotifs : Int = 1000

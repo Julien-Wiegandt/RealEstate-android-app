@@ -1,26 +1,21 @@
 package com.example.projetinf717.ui.login
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.projetinf717.R
-import com.example.projetinf717.databinding.FragmentLoginBinding
-import com.example.projetinf717.ui.home.HomeViewModel
-import androidx.annotation.NonNull
+import androidx.lifecycle.ViewModelProvider
 import com.example.projetinf717.AppActivity
-import android.content.Context.MODE_PRIVATE
-
-import android.content.SharedPreferences
 import com.example.projetinf717.Application
+import com.example.projetinf717.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment() {

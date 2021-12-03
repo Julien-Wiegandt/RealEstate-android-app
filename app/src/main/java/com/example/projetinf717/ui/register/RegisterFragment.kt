@@ -1,29 +1,17 @@
 package com.example.projetinf717.ui.register
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import com.example.projetinf717.AppActivity
-import com.example.projetinf717.Application
-import com.example.projetinf717.R
-import com.example.projetinf717.databinding.FragmentLoginBinding
-import com.example.projetinf717.databinding.FragmentRegisterBinding
-import com.example.projetinf717.ui.login.LoginViewModel
 import android.widget.EditText
-
-
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.projetinf717.databinding.FragmentRegisterBinding
 
 
 class RegisterFragment : Fragment() {

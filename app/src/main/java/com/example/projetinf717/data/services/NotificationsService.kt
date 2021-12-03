@@ -1,21 +1,21 @@
 package com.example.projetinf717.data.services
 
-import android.app.*
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import io.socket.client.IO
-import io.socket.client.Socket
-import org.json.JSONObject
-import java.net.URISyntaxException
 import com.example.projetinf717.Application
 import com.example.projetinf717.MainActivity
 import com.example.projetinf717.R
-
+import io.socket.client.IO
+import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import org.json.JSONObject
+import java.net.URISyntaxException
 
 class NotificationsService : Service() {
     var handler: Handler? = null

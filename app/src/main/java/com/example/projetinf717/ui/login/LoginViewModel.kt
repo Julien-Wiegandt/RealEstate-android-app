@@ -1,9 +1,9 @@
 package com.example.projetinf717.ui.login
 
-import com.example.projetinf717.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.projetinf717.Application
 import com.example.projetinf717.data.httpServices.Authentication
 import com.example.projetinf717.data.httpServices.VolleyCallback
 import org.json.JSONObject
