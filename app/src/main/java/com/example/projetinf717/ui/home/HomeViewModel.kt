@@ -1,13 +1,56 @@
 package com.example.projetinf717.ui.home
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.projetinf717.Application
+import com.example.projetinf717.data.httpServices.Ads
+import com.example.projetinf717.data.httpServices.VolleyCallbackAds
+import org.json.JSONArray
 
 class HomeViewModel : ViewModel() {
+    private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
+    var homesArray = JSONArray()
+
+    fun getAction(): LiveData<Action> {
+        return mAction
+    }
+    private val ads = Ads()
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
-    val text: LiveData<String> = _text
+
+
+    fun displayHomes(){
+        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+            override fun onSuccess(result: JSONArray?) {
+                if (result != null) {
+                    homesArray = result
+                }
+                showDataLoaded()
+            }
+            override fun onError() {
+                showNetworkError()
+            }
+        }
+        ads.getHouses(cb)
+    }
+
+    private fun showDataLoaded() {
+        mAction.value = Action(Action.HOMES_LOADED)
+
+    }
+    private fun showNetworkError() {
+        mAction.value = Action(Action.NETWORK_ERROR)
+    }
+}
+
+class Action(val value: Int) {
+
+    companion object {
+        const val HOMES_LOADED = 0
+        const val NETWORK_ERROR = 1
+    }
 }

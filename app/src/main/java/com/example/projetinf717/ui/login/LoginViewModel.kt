@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetinf717.Application
 import com.example.projetinf717.data.httpServices.Authentication
-import com.example.projetinf717.data.httpServices.VolleyCallback
+import com.example.projetinf717.data.httpServices.VolleyCallbackAuth
 import org.json.JSONObject
 
 class LoginViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is login Fragment"
+        value = "Real Estate login"
     }
     private val authentication = Authentication()
 
@@ -24,9 +24,8 @@ class LoginViewModel : ViewModel() {
     }
 
     fun userWantToLogin(password: String, login: String) {
-        val cb:VolleyCallback = object: VolleyCallback{
+        val cb:VolleyCallbackAuth = object: VolleyCallbackAuth{
             override fun onSuccess(result: JSONObject?) {
-                //TODO: store jwt in Application class
                 if (result != null) {
                     Application.JWT = result.get("jwt") as String?
                 }
