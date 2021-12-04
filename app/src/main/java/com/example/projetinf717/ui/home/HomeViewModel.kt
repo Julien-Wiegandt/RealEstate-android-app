@@ -1,10 +1,8 @@
 package com.example.projetinf717.ui.home
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projetinf717.Application
 import com.example.projetinf717.data.httpServices.Ads
 import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import org.json.JSONArray
