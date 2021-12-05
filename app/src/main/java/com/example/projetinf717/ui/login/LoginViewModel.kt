@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetinf717.Application
 import com.example.projetinf717.data.httpServices.Authentication
-import com.example.projetinf717.data.httpServices.VolleyCallbackAuth
+import com.example.projetinf717.data.httpServices.VolleyCallbackJsonObject
 import org.json.JSONObject
 
 class LoginViewModel : ViewModel() {
@@ -24,7 +24,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun userWantToLogin(password: String, login: String) {
-        val cb:VolleyCallbackAuth = object: VolleyCallbackAuth{
+        val cb:VolleyCallbackJsonObject = object: VolleyCallbackJsonObject{
             override fun onSuccess(result: JSONObject?) {
                 if (result != null) {
                     Application.JWT = result.get("jwt") as String?

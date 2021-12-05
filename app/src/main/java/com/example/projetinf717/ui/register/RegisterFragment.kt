@@ -98,10 +98,10 @@ class RegisterFragment : Fragment() {
         override fun afterTextChanged(editable: Editable) {}
     }
     private fun checkFieldsForEmptyValues() {
-        val s1: String = name.getText().toString()
-        val s2: String = mail.getText().toString()
-        val s3: String = password.getText().toString()
-        val s4: String = repassword.getText().toString()
+        val s1: String = name.text.toString()
+        val s2: String = mail.text.toString()
+        val s3: String = password.text.toString()
+        val s4: String = repassword.text.toString()
         btnRegister.isEnabled = s1.isNotEmpty() && s2.isNotEmpty() && s3.isNotEmpty() && s4.isNotEmpty()
     }
 

@@ -12,7 +12,6 @@ class TokenUtils {
                 Application.appContext?.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
             val token : String? = sharedPreferences?.getString("jwt", null)
             if(token != null) {
-                println("FUCK OFF")
                 Application.JWT = token
                 val jwt = JWT(token)
                 return(jwt.isExpired(10))

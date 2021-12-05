@@ -13,18 +13,18 @@ class Authentication() {
     private val urlLogin = "http://"+ Application.IP+"/auth/login"
     private val urlRegister = "http://"+ Application.IP+"/auth/register"
 
-    fun login(mail: String, password: String, callbackAuth: VolleyCallbackAuth){
+    fun login(mail: String, password: String, callbackJsonObject: VolleyCallbackJsonObject){
         val jsonObject = JSONObject()
         jsonObject.put("mail",mail)
         jsonObject.put("password",password)
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, urlLogin, jsonObject,
             { response ->
-                callbackAuth.onSuccess(response)
+                callbackJsonObject.onSuccess(response)
             },
             {err ->
                 println(err)
-                callbackAuth.onError()
+                callbackJsonObject.onError()
             })
         queue.add(jsonRequest)
 
@@ -32,7 +32,7 @@ class Authentication() {
 
 
 
-    fun register(name: String, mail: String, password: String, repassword: String, callbackAuth: VolleyCallbackAuth){
+    fun register(name: String, mail: String, password: String, repassword: String, callbackJsonObject: VolleyCallbackJsonObject){
         val jsonObject = JSONObject()
         jsonObject.put("mail",mail)
         jsonObject.put("name",name)
@@ -42,11 +42,11 @@ class Authentication() {
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, urlRegister, jsonObject,
             { response ->
-                callbackAuth.onSuccess(response)
+                callbackJsonObject.onSuccess(response)
             },
             { err ->
                 println(err)
-                callbackAuth.onError()
+                callbackJsonObject.onError()
             })
         queue.add(jsonRequest)
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetinf717.data.httpServices.Authentication
-import com.example.projetinf717.data.httpServices.VolleyCallbackAuth
+import com.example.projetinf717.data.httpServices.VolleyCallbackJsonObject
 import org.json.JSONObject
 
 class RegisterViewModel : ViewModel() {
@@ -24,7 +24,7 @@ class RegisterViewModel : ViewModel() {
         }else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
             showBadMail()
         }else{
-            val cb: VolleyCallbackAuth = object: VolleyCallbackAuth {
+            val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
                 override fun onSuccess(result: JSONObject?) {
                     showUserRegistered()
                 }
