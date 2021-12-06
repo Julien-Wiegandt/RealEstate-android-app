@@ -46,13 +46,13 @@ class MainHomeFragment : Fragment() {
         return root
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         if(Application.homeListOrMap){
             switchToMap()
         }
 
-    }
+    }*/
     private fun switchToList() {
         val fragA: Fragment = requireActivity().supportFragmentManager.findFragmentByTag("LIST") as Fragment
         val fragmentTransaction: FragmentTransaction =
