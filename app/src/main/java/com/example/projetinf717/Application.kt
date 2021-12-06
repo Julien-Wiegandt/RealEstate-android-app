@@ -14,7 +14,8 @@ class Application : Application() {
         var IP = "192.168.0.27:3000/api"
         var JWT: String? = null
         var appContext: Context? = null
-        //true = list and false = map
+        var agencyMode = false
+        //true = map and false = list
         var homeListOrMap: Boolean = false
         private var idNotifs : Int = 1000
 
