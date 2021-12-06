@@ -1,5 +1,7 @@
 package com.example.projetinf717.ui.home
 
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +10,11 @@ import androidx.fragment.app.Fragment
 import com.example.projetinf717.Application
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentHomeMapBinding
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
-
-
+import java.io.IOException
+import java.util.*
 
 
 class HomeMapFragment : Fragment(), OnMapReadyCallback {
@@ -35,7 +33,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         //val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         /*val mapFragment : SupportMapFragment = activity?.supportFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)*/
-        val mapFragment = requireActivity().supportFragmentManager
+        val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
@@ -51,13 +49,36 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
 
 
 
+
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
+        /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
+
+        var geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            var addresses: List<Address> =
+                geocoder.getFromLocationName("209 passage Garibaldi, Aix les Bains, france", 1)
+            if (addresses.isNotEmpty()) {
+                var latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                var markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title("Chateau Misser")
+                markerOptions.position(latLong)
+                mMap?.addMarker(markerOptions)
+                var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                    latLong,
+                    5F
+                )
+                mMap?.animateCamera(cameraUpdate)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
+
+
 
 }
