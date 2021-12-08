@@ -1,5 +1,7 @@
 package com.example.projetinf717.ui.addads
 
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -12,6 +14,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.projetinf717.databinding.FragmentAddAdsBinding
+import com.google.android.gms.maps.model.LatLng
+import java.util.*
 
 
 class AddAdsFragment : Fragment() {
@@ -93,6 +97,7 @@ class AddAdsFragment : Fragment() {
             val email = editTextEmail.text.toString()
             val phone = editTextPhone.text.toString()
             val rent = switchRent.isChecked
+
             addAdsViewModel.createAd(title, address, desc, estateType, estatePrice, numberBath, numberBed, email, phone, rent)
         }
 
@@ -136,6 +141,9 @@ class AddAdsFragment : Fragment() {
             }
             Action.SHOW_INVALID_FORM -> {
                 Toast.makeText(context,"Invalid form", Toast.LENGTH_SHORT).show();
+            }
+            Action.SHOW_BAD_ADDRESS -> {
+                Toast.makeText(context,"This address doesn't exist", Toast.LENGTH_SHORT).show();
             }
 
         }

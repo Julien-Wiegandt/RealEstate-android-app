@@ -7,6 +7,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.projetinf717.Application
+import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
 
 
@@ -31,7 +32,7 @@ class Ads {
 
     fun createAd(title: String, address: String,desc : String,estateType: String,
                    estatePrice: String, numberBath: String, numberBed: String,
-                   email: String, phone: String, rent: Boolean,
+                   email: String, phone: String, rent: Boolean, latLng: LatLng,
                    callback: VolleyCallbackJsonObject ){
         val queue = Volley.newRequestQueue(Application.appContext)
         val url = "http://" + Application.IP + "/housings"
@@ -47,6 +48,7 @@ class Ads {
         jsonObject.put("email",email)
         jsonObject.put("phone",phone)
         jsonObject.put("rent",rent)
+        jsonObject.put("latLong",latLng)
 
         val jsonRequest : JsonObjectRequest = object : JsonObjectRequest(
             Method.POST, url, jsonObject,
