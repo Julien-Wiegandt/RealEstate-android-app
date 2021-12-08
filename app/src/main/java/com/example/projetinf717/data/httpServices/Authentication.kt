@@ -23,6 +23,7 @@ class Authentication() {
                 callbackJsonObject.onSuccess(response)
             },
             {err ->
+                println("hey")
                 println(err)
                 callbackJsonObject.onError()
             })

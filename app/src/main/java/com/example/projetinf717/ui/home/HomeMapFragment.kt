@@ -33,7 +33,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeMapBinding? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val binding get() = _binding!!
-
+    lateinit var marker : MarkerOptions
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,9 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
         }
+
+        val sherbrooke = LatLng(45.0, -31.0)
+        marker = MarkerOptions().position(sherbrooke)
 
         val root: View = binding.root
 
@@ -66,10 +69,15 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location->
                 if (location != null) {
-                    Toast.makeText(context,"OUIII", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Votre position", Toast.LENGTH_SHORT).show();
+                    var latLng : LatLng = LatLng(location.latitude, location.longitude)
+                    marker = MarkerOptions()
+                        .position(latLng )
+                        .title("Ma position")
+                    mMap.addMarker(marker)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 12F))
                 }else{
                     Toast.makeText(context,"Marche pas", Toast.LENGTH_SHORT).show();
-
                 }
 
             }
@@ -124,11 +132,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        getLastKnownLocation()
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
 
-        var geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+        /*var geocoder: Geocoder = Geocoder(context, Locale.getDefault())
         try {
             var addresses: List<Address> =
                 geocoder.getFromLocationName("209 passage Garibaldi, Aix les Bains, france", 1)
@@ -186,7 +195,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             }
         } catch (e: IOException) {
             e.printStackTrace()
-        }
+        }*/
     }
 
 
