@@ -61,6 +61,7 @@ class RegisterFragment : Fragment() {
         
 
         btnRegister.setOnClickListener {
+            btnRegister.isEnabled = false
             registerViewModel.userWantToRegister(name.text.toString(),mail.text.toString(),password.text.toString(),repassword.text.toString())
         }
 
@@ -78,12 +79,15 @@ class RegisterFragment : Fragment() {
                 repassword.setText("")
             }
             Action.INVALID_MAIL ->{
+                btnRegister.isEnabled = true
                 Toast.makeText(context,"Bad mail address", Toast.LENGTH_SHORT).show();
             }
             Action.PASSWORDS_DOES_NOT_CORRESPOND -> {
+                btnRegister.isEnabled = true
                 Toast.makeText(context,"Passwords must correspond", Toast.LENGTH_SHORT).show();
             }
             Action.INVALID_ARGUMENTS -> {
+                btnRegister.isEnabled = true
                 Toast.makeText(context,"Bad arguments try again", Toast.LENGTH_SHORT).show();
             }
         }

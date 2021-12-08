@@ -27,6 +27,8 @@ class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
 
+    private lateinit var loginButton: Button
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -41,7 +43,7 @@ class LoginFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.tvTitle
-        val loginButton: Button = binding.btnLogin
+        loginButton = binding.btnLogin
 
         loginViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
@@ -50,6 +52,7 @@ class LoginFragment : Fragment() {
             Observer<Action?> { action -> action?.let { handleAction(it) } })
 
         loginButton.setOnClickListener {
+            loginButton.isEnabled = false
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             loginViewModel.userWantToLogin(password, email);
@@ -71,6 +74,7 @@ class LoginFragment : Fragment() {
                 activity?.finish()
             }
             Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
+                loginButton.isEnabled = true
                 Toast.makeText(context,"Bad email/password, try again", Toast.LENGTH_SHORT).show();
             }
         }
