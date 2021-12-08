@@ -33,6 +33,8 @@
         android:padding="8dp"
         android:background="@drawable/et_custom"
         android:hint="@string/editTextTitleHint"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/imgAddButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,32 +54,21 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/imageToUpload"
-        android:layout_width="306dp"
-        android:layout_height="231dp"
-        android:layout_marginTop="256dp"
-        android:contentDescription="@string/imageContentDescription"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/editTextStreet"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="264dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/et_custom"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
         android:ems="10"
+        android:padding="8dp"
+        android:background="@drawable/et_custom"
         android:hint="@string/editTextAddressHint"
         android:inputType="textPersonName"
-        android:padding="8dp"
         app:layout_constraintEnd_toStartOf="@+id/locationButton"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
@@ -107,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStreet"
         >
 
         <EditText
@@ -119,6 +110,8 @@
             android:background="@drawable/et_custom"
             android:ems="10"
             android:hint="@string/editTextPostalCodeHint"
+            android:textColorHint="@color/greyLight"
+            android:textColor="@color/greyDark"
             android:inputType="textPersonName"
             android:padding="8dp" />
 
@@ -156,6 +149,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:textColorHint="@color/greyLight"
+            android:textColor="@color/greyDark"
             android:background="@drawable/et_custom"
             android:ems="10"
             android:hint="@string/editTextCityHint"
@@ -168,6 +163,8 @@
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:textColorHint="@color/greyLight"
+            android:textColor="@color/greyDark"
             android:background="@drawable/et_custom"
             android:ems="10"
             android:hint="@string/editTextCountryHint"
@@ -183,6 +180,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/et_custom"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/editTextDescriptionHint"
@@ -198,28 +197,54 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/et_custom"
-        android:hint="@string/editTextEmailHint"
-        android:inputType="textEmailAddress"
-        android:padding="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescription">
+
+        <EditText
+            android:id="@+id/editTextEstateType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:textColorHint="@color/greyLight"
+            android:textColor="@color/greyDark"
+            android:hint="@string/editTextEstateTypeHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTextEstatePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:textColorHint="@color/greyLight"
+            android:textColor="@color/greyDark"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextEstatePriceHint"
+            android:inputType="numberDecimal"
+            android:padding="8dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         android:weightSum="7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -257,8 +282,10 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_number_inputs"
                 android:ems="10"
-                android:hint="@string/bedStartNumber"
+                android:textColorHint="@color/greyLight"
+                android:textColor="@color/greyDark"
                 android:inputType="number"
+                android:hint="@string/bedStartNumber"
                 android:textAlignment="center"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -289,8 +316,10 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_number_inputs"
                 android:ems="10"
-                android:hint="@string/bathroomStartNumber"
+                android:textColorHint="@color/greyLight"
+                android:textColor="@color/greyDark"
                 android:inputType="number"
+                android:hint="@string/bathroomStartNumber"
                 android:textAlignment="center"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -321,8 +350,10 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_number_inputs"
                 android:ems="10"
-                android:hint="@string/garageStartNumber"
+                android:textColorHint="@color/greyLight"
+                android:textColor="@color/greyDark"
                 android:inputType="number"
+                android:hint="@string/garageStartNumber"
                 android:textAlignment="center"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -330,18 +361,36 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/editTextEmailHint"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/et_custom"
         android:hint="@string/editTextPhoneHint"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
         android:inputType="textEmailAddress"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
@@ -349,83 +398,11 @@
         android:id="@+id/createAdsButton"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/createAdsButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
-
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/et_custom"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/editTextDescriptionHint"
-        android:inputType="textMultiLine"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescription">
-
-        <EditText
-            android:id="@+id/editTextEstateType"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/et_custom"
-            android:ems="10"
-            android:hint="@string/editTextEstateTypeHint"
-            android:inputType="textPersonName"
-            android:padding="8dp" />
-
-        <EditText
-            android:id="@+id/editTextEstatePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/et_custom"
-            android:ems="10"
-            android:hint="@string/editTextEstatePriceHint"
-            android:inputType="numberDecimal"
-            android:padding="8dp" />
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/locationButton"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="264dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/location_button"
-        android:contentDescription="@string/locationButtonContentDescription"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgAddButton"
-        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -20,7 +20,6 @@ class HomeViewModel : ViewModel() {
         value = "This is home Fragment"
     }
 
-
     fun displayHomes(){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccess(result: JSONArray?) {

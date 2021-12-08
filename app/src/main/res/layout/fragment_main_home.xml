@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingBottom="20dp"
         android:checked="false"
         android:text="@string/map"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,13 +18,14 @@
 
     <LinearLayout
         android:id="@+id/mainHomeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOrMapSwitch"
-        tools:context=".ui.home.MainHomeFragment"
-        android:orientation="horizontal">
+        tools:context=".ui.home.MainHomeFragment">
 
     </LinearLayout>
 

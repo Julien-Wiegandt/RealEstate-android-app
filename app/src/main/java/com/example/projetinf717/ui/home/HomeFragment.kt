@@ -1,9 +1,12 @@
 package com.example.projetinf717.ui.home
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+
     private var housesArray = JSONArray()
     private val viewAdapter = MyAdapter(housesArray)
 
@@ -71,18 +75,28 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleAction(action: Action) {
-        when (action.value) {
-            Action.HOMES_LOADED -> {
-                viewAdapter.swapDataSet(homeViewModel.homesArray)
-                swipeContainer.isRefreshing = false
-            }
-            Action.NETWORK_ERROR ->{
-                if(Application.isActivityVisible()){
-                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
-                }
-                swipeContainer.isRefreshing = false
-            }
-        }
+//        when (action.value) {
+//            Action.HOMES_LOADED -> {
+        // TEMP DATA
+        val tempHouseArray = JSONArray()
+        val house = JSONObject()
+        house.put("title", "Offer over ")
+        house.put("price", 240000)
+        house.put("city", "Sherbrooke")
+        house.put("street", "2500 Boulevard de l'Université")
+        tempHouseArray.put(house)
+        viewAdapter.swapDataSet(tempHouseArray)
+        Toast.makeText(context,tempHouseArray.toString(),Toast.LENGTH_SHORT).show();
+//                viewAdapter.swapDataSet(homeViewModel.homesArray)
+                swipeContainer.isRefreshing = true
+//            }
+//            Action.NETWORK_ERROR ->{
+//                if(Application.isActivityVisible()){
+//                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
+//                }
+//                swipeContainer.isRefreshing = false
+//            }
+//        }
     }
 
 
@@ -116,7 +130,12 @@ class MyAdapter(private var myDataset: JSONArray) :
         // - replace the contents of the view with that element
         val house = myDataset[position] as JSONObject
 
+        val title = house.getString("title")
+        val price = house.getInt("price")
+        val city = house.getString("city")
+        val street = house.getString("street")
 
+        holder.item.findViewById<TextView>(R.id.title).text = title
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to position)
