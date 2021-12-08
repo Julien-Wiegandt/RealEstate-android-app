@@ -1,25 +1,37 @@
 package com.example.projetinf717.ui.home
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentHomeMapBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 import java.util.*
+import android.app.Activity
+
+import androidx.core.app.ActivityCompat
+
+import android.content.pm.PackageManager
+
+import androidx.core.content.ContextCompat
 
 
 class HomeMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var _binding: FragmentHomeMapBinding? = null
-
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val binding get() = _binding!!
 
 
@@ -28,8 +40,15 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         _binding = FragmentHomeMapBinding.inflate(inflater, container, false)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        checkAndRequestPermissions()
+
+        binding.floatingActionButton.setOnClickListener{
+            getLastKnownLocation()
+        }
+
         val root: View = binding.root
 
         return root
@@ -40,6 +59,61 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getLastKnownLocation() {
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location->
+                if (location != null) {
+                    Toast.makeText(context,"OUIII", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"Marche pas", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+    }
+
+    fun checkAndRequestPermissions(): Boolean {
+        val internet = context?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.INTERNET
+            )
+        }
+        val loc = context?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        }
+        val loc2 = context?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        }
+        val listPermissionsNeeded: MutableList<String> = ArrayList()
+        if (internet != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.INTERNET)
+        }
+        if (loc != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (loc2 != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(
+                (context as Activity?)!!,
+                listPermissionsNeeded.toTypedArray(),
+                1
+            )
+            return false
+        }
+        return true
     }
 
 
