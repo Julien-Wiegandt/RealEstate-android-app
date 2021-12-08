@@ -34,23 +34,29 @@ class AddAdsViewModel : ViewModel() {
                    email: String, phone: String, rent: Boolean
     ){
         val latLong: LatLng
-        val addressToLatLong: List<Address> =
-            geocoder.getFromLocationName(address, 1)
-        if(addressToLatLong.isNotEmpty()) {
-            latLong = LatLng(addressToLatLong[0].latitude, addressToLatLong[0].longitude)
-            val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
-                override fun onSuccess(result: JSONObject?) {
-                    showAdsCreated()
-                }
-                override fun onError() {
-                    showInvalidArguments()
-                }
-            }
-            ads.createAd(title,address,desc,estateType,estatePrice,numberBath,numberBed
-                ,email,phone, rent, latLong, cb)
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showBadMail()
         }else{
-            showBadAddress()
+            val addressToLatLong: List<Address> =
+                geocoder.getFromLocationName(address, 1)
+
+            if(addressToLatLong.isNotEmpty()) {
+                latLong = LatLng(addressToLatLong[0].latitude, addressToLatLong[0].longitude)
+                val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
+                    override fun onSuccess(result: JSONObject?) {
+                        showAdsCreated()
+                    }
+                    override fun onError() {
+                        showInvalidArguments()
+                    }
+                }
+                ads.createAd(title,address,desc,estateType,estatePrice,numberBath,numberBed
+                    ,email,phone, rent, latLong, cb)
+            }else{
+                showBadAddress()
+            }
         }
+
 
 
     }
@@ -63,6 +69,9 @@ class AddAdsViewModel : ViewModel() {
     private fun showBadAddress() {
         mAction.value = Action(Action.SHOW_BAD_ADDRESS)
     }
+    private fun showBadMail() {
+        mAction.value = Action(Action.SHOW_BAD_MAIL)
+    }
 }
 
 
@@ -73,5 +82,6 @@ class Action(val value: Int) {
         const val SHOW_AD_CREATED = 0
         const val SHOW_INVALID_FORM = 1
         const val SHOW_BAD_ADDRESS = 2
+        const val SHOW_BAD_MAIL = 3
     }
 }
