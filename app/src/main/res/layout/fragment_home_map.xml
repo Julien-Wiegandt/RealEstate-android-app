@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
+
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="0dp"
@@ -23,6 +24,8 @@
         android:background="@drawable/search_bar_states"
         android:ems="10"
         android:hint="@string/editTextSearchHint"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
         android:inputType="textPersonName"
         android:padding="8dp"
         app:layout_constraintEnd_toStartOf="@+id/button"
