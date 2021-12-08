@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextAddress"
+        android:id="@+id/editTextStreet"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
@@ -81,8 +81,120 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
+    <ImageButton
+        android:id="@+id/locationButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/location_button"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@string/locationButtonContentDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgAddButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPostalCode"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
+        >
+
+        <EditText
+            android:id="@+id/editTextPostalCode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextPostalCodeHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTextNoVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:visibility="invisible"
+            android:hint="@string/editTextCountryHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAddress"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPostalCode">
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextCityHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTextCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextCountryHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+    </LinearLayout>
+
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextDescription"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/editTextDescriptionHint"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutAddress" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"

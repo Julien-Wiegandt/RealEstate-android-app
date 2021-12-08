@@ -1,9 +1,10 @@
-package com.example.projetinf717.ui.addads
 
 import android.R
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -27,12 +28,17 @@ import android.util.Base64
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
+import com.google.android.gms.maps.model.LatLng
+import java.util.*
 
 
 class AddAdsFragment : Fragment() {
 
     private lateinit var editTextTitle: EditText
-    private lateinit var editTextAddress: EditText
+    private lateinit var editTextStreet: EditText
+    private lateinit var editTextPostalCode: EditText
+    private lateinit var editTextCity: EditText
+    private lateinit var editTextCountry: EditText
     private lateinit var editTextEstateType: EditText
     private lateinit var editTextDescription: EditText
     private lateinit var editTextEstatePrice: EditText
@@ -76,7 +82,10 @@ class AddAdsFragment : Fragment() {
         val switchRent: Switch = binding.switchRent
 
         editTextTitle = binding.editTextTitle
-        editTextAddress = binding.editTextAddress
+        editTextStreet = binding.editTextStreet
+        editTextPostalCode = binding.editTextPostalCode
+        editTextCountry = binding.editTextCountry
+        editTextCity = binding.editTextCity
         editTextDescription = binding.editTextDescription
         editTextEstateType = binding.editTextEstateType
         editTextEstatePrice = binding.editTextEstatePrice
@@ -87,7 +96,10 @@ class AddAdsFragment : Fragment() {
         imgToUpload = binding.imageToUpload
 
         editTextTitle.addTextChangedListener(textWatcher)
-        editTextAddress.addTextChangedListener(textWatcher)
+        editTextStreet.addTextChangedListener(textWatcher)
+        editTextCity.addTextChangedListener(textWatcher)
+        editTextPostalCode.addTextChangedListener(textWatcher)
+        editTextCountry.addTextChangedListener(textWatcher)
         editTextDescription.addTextChangedListener(textWatcher)
         editTextEstateType.addTextChangedListener(textWatcher)
         editTextEstatePrice.addTextChangedListener(textWatcher)
@@ -102,7 +114,10 @@ class AddAdsFragment : Fragment() {
 
         createAdsButton.setOnClickListener {
             val title = editTextTitle.text.toString()
-            val address = editTextAddress.text.toString()
+            val street = editTextStreet.text.toString()
+            val city = editTextCity.text.toString()
+            val codePostal = editTextPostalCode.text.toString()
+            val country = editTextCountry.text.toString()
             val desc = editTextDescription.text.toString()
             val estateType = editTextEstateType.text.toString()
             val estatePrice = editTextEstatePrice.text.toString()
@@ -174,6 +189,9 @@ class AddAdsFragment : Fragment() {
             Action.SHOW_INVALID_FORM -> {
                 Toast.makeText(context,"Invalid form", Toast.LENGTH_SHORT).show();
             }
+            Action.SHOW_BAD_ADDRESS -> {
+                Toast.makeText(context,"This address doesn't exist", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
@@ -196,7 +214,10 @@ class AddAdsFragment : Fragment() {
 
     private fun checkFieldsForEmptyValues() {
         val s1: String = editTextTitle.text.toString()
-        val s2: String = editTextAddress.text.toString()
+        val s2: String = editTextStreet.text.toString()
+        val s10: String = editTextCity.text.toString()
+        val s11: String = editTextPostalCode.text.toString()
+        val s12: String = editTextCountry.text.toString()
         val s3: String = editTextDescription.text.toString()
         val s4: String = editTextEstateType.text.toString()
         val s5: String = editTextEstatePrice.text.toString()
@@ -207,7 +228,8 @@ class AddAdsFragment : Fragment() {
         createAdsButton.isEnabled = s1.isNotEmpty() && s2.isNotEmpty() &&
                 s3.isNotEmpty() && s4.isNotEmpty()&& s5.isNotEmpty()
                 && s6.isNotEmpty()&& s7.isNotEmpty()&& s8.isNotEmpty()
-                && s9.isNotEmpty()
+                && s9.isNotEmpty()&& s10.isNotEmpty()&& s11.isNotEmpty()
+                && s12.isNotEmpty()
     }
 
     override fun onDestroyView() {

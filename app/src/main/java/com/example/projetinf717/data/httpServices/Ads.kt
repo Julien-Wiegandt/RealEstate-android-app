@@ -8,6 +8,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.projetinf717.Application
+import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
 
 import android.graphics.BitmapFactory
@@ -43,6 +44,7 @@ class Ads {
 
     }
 
+<<<<<<< HEAD
     private fun createPostBody(params: Map<String, String?>?): String? {
         val sbPost = StringBuilder()
         if (params != null) {
@@ -85,13 +87,21 @@ class Ads {
     fun createAd(title: String, address: String,desc : String,estateType: String,
                    estatePrice: String, numberBath: String, numberBed: String,
                    email: String, phone: String, rent: Boolean, imgUri : String,
+=======
+    fun createAd(title: String, street: String, city: String, codePostal: String, country: String,desc : String,estateType: String,
+                   estatePrice: String, numberBath: String, numberBed: String,
+                   email: String, phone: String, rent: Boolean, latLng: LatLng,
+>>>>>>> 94733d17ae807f11f6979fa80cce83e33ce3d0ca
                    callback: VolleyCallbackJsonObject ){
         val queue = Volley.newRequestQueue(Application.appContext)
         val url = "http://" + Application.IP + "/housings"
 
         val jsonObject = JSONObject()
         jsonObject.put("title",title)
-        jsonObject.put("address",address)
+        jsonObject.put("street",street)
+        jsonObject.put("city",city)
+        jsonObject.put("codePostal",codePostal)
+        jsonObject.put("country",country)
         jsonObject.put("description",desc)
         jsonObject.put("estateType",estateType)
         jsonObject.put("estatePrice",estatePrice.toInt())
@@ -100,6 +110,7 @@ class Ads {
         jsonObject.put("email",email)
         jsonObject.put("phone",phone)
         jsonObject.put("rent",rent)
+        jsonObject.put("latLong",latLng)
 
         val jsonRequest : JsonObjectRequest = object : JsonObjectRequest(
             Method.POST, url, jsonObject,

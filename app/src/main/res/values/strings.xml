@@ -20,7 +20,10 @@
     <string name="imageContentDescription">Real Estate</string>
     <string name="imgAddButtonContentDescription">Set image button</string>
     <string name="locationButtonContentDescription">Set location button</string>
-    <string name="editTextAddressHint">Address</string>
+    <string name="editTextAddressHint">Street</string>
+    <string name="editTextCityHint">City</string>
+    <string name="editTextCountryHint">Country</string>
+    <string name="editTextPostalCodeHint">Postal code</string>
     <string name="editTextDescriptionHint">Description</string>editTextEstateTypeHint
     <string name="editTextEstateTypeHint">Estate type</string>
     <string name="editTextEstatePriceHint">Estate price $CAD</string>
@@ -35,6 +38,8 @@
     <string name="profileImageContentDescription">Your profile</string>
     <string name="profileAgencySwicth">Agency</string>
     <string name="profileUpdatePasswordButton">Update password</string>
+    <!-- Map strings -->
+    <string name="editTextSearchHint">Search</string>
 
 
     <string name="channel_name">Notifications</string>
