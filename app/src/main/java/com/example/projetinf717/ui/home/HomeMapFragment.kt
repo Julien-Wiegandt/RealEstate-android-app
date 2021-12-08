@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.projetinf717.Application
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentHomeMapBinding
 import com.google.android.gms.maps.*
@@ -30,20 +29,17 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         // Inflate the layout for this fragment
 
-        //val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        /*val mapFragment : SupportMapFragment = activity?.supportFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)*/
-        val mapFragment = childFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
-
-
-
-
         _binding = FragmentHomeMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val mapFragment = childFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
     }
 
 
@@ -62,6 +58,46 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         try {
             var addresses: List<Address> =
                 geocoder.getFromLocationName("209 passage Garibaldi, Aix les Bains, france", 1)
+            var addresses2: List<Address> =
+                geocoder.getFromLocationName("50 route de st innocent, Aix les Bains, france", 1)
+            if(addresses2.isNotEmpty()){
+                var latLong: LatLng = LatLng(addresses2[0].latitude, addresses2[0].longitude)
+                var markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title("Chateau Misser")
+                markerOptions.position(latLong)
+                mMap?.addMarker(markerOptions)
+            }
+
+            var addresses3: List<Address> =
+                geocoder.getFromLocationName("12 rue vaissiere, Montpellier, france", 1)
+            if(addresses3.isNotEmpty()){
+                var latLong: LatLng = LatLng(addresses3[0].latitude, addresses3[0].longitude)
+                var markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title("Chateau Misser")
+                markerOptions.position(latLong)
+                mMap?.addMarker(markerOptions)
+            }
+
+            var addresses4: List<Address> =
+                geocoder.getFromLocationName("955 rue kitchener, Canada, quebec, sherbrooke", 1)
+            if(addresses4.isNotEmpty()){
+                var latLong: LatLng = LatLng(addresses4[0].latitude, addresses4[0].longitude)
+                var markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title("Chateau Misser")
+                markerOptions.position(latLong)
+                mMap?.addMarker(markerOptions)
+            }
+
+            var addresses5: List<Address> =
+                geocoder.getFromLocationName("tour eiffel, paris", 1)
+            if(addresses5.isNotEmpty()){
+                var latLong: LatLng = LatLng(addresses5[0].latitude, addresses5[0].longitude)
+                var markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title("Chateau Misser")
+                markerOptions.position(latLong)
+                mMap?.addMarker(markerOptions)
+            }
+
             if (addresses.isNotEmpty()) {
                 var latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
                 var markerOptions: MarkerOptions = MarkerOptions()

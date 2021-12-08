@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.projetinf717.data.httpServices.Ads
 import com.example.projetinf717.databinding.FragmentAddAdsBinding
 
 

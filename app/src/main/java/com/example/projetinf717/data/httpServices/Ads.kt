@@ -1,23 +1,13 @@
 package com.example.projetinf717.data.httpServices
 
-import android.content.Context
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.projetinf717.Application
 import org.json.JSONObject
-import com.android.volley.*
-
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.AuthFailureError
-
-import com.android.volley.VolleyError
-
-
-
-
-
-
 
 
 class Ads {

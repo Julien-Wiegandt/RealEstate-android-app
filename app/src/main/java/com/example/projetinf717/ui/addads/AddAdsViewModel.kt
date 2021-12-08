@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetinf717.data.httpServices.Ads
-import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import com.example.projetinf717.data.httpServices.VolleyCallbackJsonObject
-import org.json.JSONArray
 import org.json.JSONObject
 
 class AddAdsViewModel : ViewModel() {
