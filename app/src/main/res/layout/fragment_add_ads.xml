@@ -83,6 +83,47 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutPostalCode"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
+        >
+
+        <EditText
+            android:id="@+id/editTextPostalCode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextPostalCodeHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTextNoVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:visibility="invisible"
+            android:hint="@string/editTextCountryHint"
+            android:inputType="textPersonName"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayoutAddress"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -94,7 +135,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAddress">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPostalCode">
 
         <EditText
             android:id="@+id/editTextCity"
@@ -109,14 +150,14 @@
             android:padding="8dp" />
 
         <EditText
-            android:id="@+id/editTextPostalCode"
+            android:id="@+id/editTextCountry"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/et_custom"
             android:ems="10"
-            android:hint="@string/editTextPostalCodeHint"
+            android:hint="@string/editTextCountryHint"
             android:inputType="textPersonName"
             android:padding="8dp" />
     </LinearLayout>

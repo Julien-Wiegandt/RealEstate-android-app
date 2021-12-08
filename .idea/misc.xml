@@ -24,14 +24,17 @@
         <entry key="..\:/Users/lelez/AndroidStudioProjects/ProjetINF717/app/src/main/res/layout/register_fragment.xml" value="0.1" />
         <entry key="..\:/Users/lelez/AndroidStudioProjects/ProjetINF717/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/btn_custom.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/cstm_edittext_straight_end.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/custom_number_inputs.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/et_custom.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/ic_arrow_right.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/search_bar_focus.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/drawable/search_bar_states.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_add_ads.xml" value="0.25" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_home.xml" value="0.4" />
-        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_home_map.xml" value="0.25" />
+        <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_home_map.xml" value="0.2" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_main_home.xml" value="0.25" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/fragment_notifications.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/wiega/projets/ProjetINF717/app/src/main/res/layout/item_list_house.xml" value="0.12708333333333333" />
