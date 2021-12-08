@@ -30,7 +30,7 @@ class Ads {
 
     }
 
-    fun createAd(title: String, address: String,desc : String,estateType: String,
+    fun createAd(title: String, street: String, city: String, codePostal: String, country: String,desc : String,estateType: String,
                    estatePrice: String, numberBath: String, numberBed: String,
                    email: String, phone: String, rent: Boolean, latLng: LatLng,
                    callback: VolleyCallbackJsonObject ){
@@ -39,7 +39,10 @@ class Ads {
 
         val jsonObject = JSONObject()
         jsonObject.put("title",title)
-        jsonObject.put("address",address)
+        jsonObject.put("street",street)
+        jsonObject.put("city",city)
+        jsonObject.put("codePostal",codePostal)
+        jsonObject.put("country",country)
         jsonObject.put("description",desc)
         jsonObject.put("estateType",estateType)
         jsonObject.put("estatePrice",estatePrice.toInt())

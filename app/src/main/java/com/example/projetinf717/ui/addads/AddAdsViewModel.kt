@@ -29,7 +29,7 @@ class AddAdsViewModel : ViewModel() {
     }
 
 
-    fun createAd(title: String, address: String,desc : String,estateType: String,
+    fun createAd(title: String, street: String,city: String,codePostal: String,country: String,desc : String,estateType: String,
                    estatePrice: String, numberBath: String, numberBed: String,
                    email: String, phone: String, rent: Boolean
     ){
@@ -37,6 +37,7 @@ class AddAdsViewModel : ViewModel() {
         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showBadMail()
         }else{
+            val address = "$street, $codePostal, $city, $country"
             val addressToLatLong: List<Address> =
                 geocoder.getFromLocationName(address, 1)
 
@@ -50,7 +51,7 @@ class AddAdsViewModel : ViewModel() {
                         showInvalidArguments()
                     }
                 }
-                ads.createAd(title,address,desc,estateType,estatePrice,numberBath,numberBed
+                ads.createAd(title,street,city,codePostal,country,desc,estateType,estatePrice,numberBath,numberBed
                     ,email,phone, rent, latLong, cb)
             }else{
                 showBadAddress()
