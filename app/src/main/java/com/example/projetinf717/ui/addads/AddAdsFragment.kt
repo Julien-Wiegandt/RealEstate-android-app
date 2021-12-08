@@ -25,6 +25,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Base64
+import com.example.projetinf717.classes.Housing
+import com.example.projetinf717.ui.addads.Action
+import com.example.projetinf717.ui.addads.AddAdsViewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
@@ -93,7 +96,7 @@ class AddAdsFragment : Fragment() {
         editTextNumberBed = binding.editTextNumberBed
         editTextEmail = binding.editTextEmail
         editTextPhone = binding.editTextPhone
-        imgToUpload = binding.imageToUpload
+        imgToUpload = binding.imgToUpload
 
         editTextTitle.addTextChangedListener(textWatcher)
         editTextStreet.addTextChangedListener(textWatcher)
@@ -116,7 +119,7 @@ class AddAdsFragment : Fragment() {
             val title = editTextTitle.text.toString()
             val street = editTextStreet.text.toString()
             val city = editTextCity.text.toString()
-            val codePostal = editTextPostalCode.text.toString()
+            val postalCode = editTextPostalCode.text.toString()
             val country = editTextCountry.text.toString()
             val desc = editTextDescription.text.toString()
             val estateType = editTextEstateType.text.toString()
@@ -126,6 +129,7 @@ class AddAdsFragment : Fragment() {
             val email = editTextEmail.text.toString()
             val phone = editTextPhone.text.toString()
             val rent = switchRent.isChecked
+            val housing = Housing(title,street,city, postalCode, country,estatePrice,estateType,rent,numberBath,numberBed,email,phone,desc,null,null)
 
             if(uri != null){
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
@@ -134,9 +138,7 @@ class AddAdsFragment : Fragment() {
                     val encodedImage: String? = encodeImage(selectedImage)
                     if(encodedImage != null){
                         println("IMAGE ENCODE FRERO")
-                        addAdsViewModel.createAd(title, address, desc, estateType, estatePrice, numberBath, numberBed, email, phone, rent,
-                            encodedImage
-                        )
+                        addAdsViewModel.createAd(housing,encodedImage)
 
                     }
                 }
