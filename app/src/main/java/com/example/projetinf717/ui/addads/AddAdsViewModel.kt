@@ -1,5 +1,6 @@
 package com.example.projetinf717.ui.addads
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,17 +26,36 @@ class AddAdsViewModel : ViewModel() {
 
     fun createAd(title: String, address: String,desc : String,estateType: String,
                    estatePrice: String, numberBath: String, numberBed: String,
-                   email: String, phone: String, rent: Boolean){
-        val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
+                   email: String, phone: String, rent: Boolean, b64Image : String){
+        val uploadImageCb : VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
             override fun onSuccess(result: JSONObject?) {
-                showAdsCreated()
+                val addHousingCb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
+                    override fun onSuccess(result: JSONObject?) {
+                        showAdsCreated()
+                    }
+                    override fun onError() {
+                        showInvalidArguments()
+                    }
+                }
+                println("onSuccess")
+                println(result)
+                if(result != null){
+                    val data = result.get("data") as JSONObject?
+                    if(data != null){
+                        val url = data.get("url") as String
+                        println("url")
+                        println(url)
+                        ads.createAd(title,address,desc,estateType,estatePrice,numberBath,numberBed
+                            ,email,phone, rent, url,addHousingCb)
+                    }
+                }
             }
+
             override fun onError() {
-                showInvalidArguments()
+                println("err")
             }
         }
-        ads.createAd(title,address,desc,estateType,estatePrice,numberBath,numberBed
-        ,email,phone, rent, cb)
+        ads.hostImage(b64Image, uploadImageCb)
 
     }
     private fun showInvalidArguments() {

@@ -1,17 +1,32 @@
 package com.example.projetinf717.ui.addads
 
+import android.R
+import android.app.Activity
+import android.app.Application
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.projetinf717.databinding.FragmentAddAdsBinding
+import android.graphics.BitmapFactory
+
+import android.graphics.Bitmap
+import android.net.Uri
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.InputStream
 
 
 class AddAdsFragment : Fragment() {
@@ -25,11 +40,13 @@ class AddAdsFragment : Fragment() {
     private lateinit var editTextNumberBed: EditText
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPhone: EditText
-
+    private lateinit var imgToUpload : ImageView
     private lateinit var createAdsButton: Button
 
     private lateinit var addAdsViewModel: AddAdsViewModel
     private var _binding: FragmentAddAdsBinding? = null
+
+    private var uri : Uri? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -67,6 +84,7 @@ class AddAdsFragment : Fragment() {
         editTextNumberBed = binding.editTextNumberBed
         editTextEmail = binding.editTextEmail
         editTextPhone = binding.editTextPhone
+        imgToUpload = binding.imageToUpload
 
         editTextTitle.addTextChangedListener(textWatcher)
         editTextAddress.addTextChangedListener(textWatcher)
@@ -93,14 +111,29 @@ class AddAdsFragment : Fragment() {
             val email = editTextEmail.text.toString()
             val phone = editTextPhone.text.toString()
             val rent = switchRent.isChecked
-            addAdsViewModel.createAd(title, address, desc, estateType, estatePrice, numberBath, numberBed, email, phone, rent)
+
+            if(uri != null){
+                val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
+                if(imageStream != null){
+                    val selectedImage = BitmapFactory.decodeStream(imageStream)
+                    val encodedImage: String? = encodeImage(selectedImage)
+                    if(encodedImage != null){
+                        println("IMAGE ENCODE FRERO")
+                        addAdsViewModel.createAd(title, address, desc, estateType, estatePrice, numberBath, numberBed, email, phone, rent,
+                            encodedImage
+                        )
+
+                    }
+                }
+            }
         }
+
+
 
 
         // Binding views
 //        binding.imageView
 //        binding.editTextTitle
-//        binding.imgAddButton
 //        binding.editTextAddress
 //        binding.locationButton
 //        binding.editTextDescription
@@ -116,6 +149,10 @@ class AddAdsFragment : Fragment() {
 //        binding.editTextEmail
 //        binding.editTextPhone
 //        binding.createAdsButton
+        binding.imgAddButton.setOnClickListener{
+            openActivityForResult()
+        }
+
         binding.imageButtonBed.setOnClickListener{
             binding.editTextNumberBed.requestFocus()
         }
@@ -139,6 +176,13 @@ class AddAdsFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun encodeImage(bm: Bitmap): String? {
+        val os = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, os)
+        val b: ByteArray = os.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
     private val textWatcher: TextWatcher = object : TextWatcher {
@@ -170,4 +214,26 @@ class AddAdsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val res: Intent? = result.data
+            if(res != null){
+                val extra = res.data
+                uri = extra;
+                imgToUpload.setImageURI(extra)
+            }
+        }
+    }
+
+    private fun openActivityForResult() {
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        startForResult.launch(intent)
+
+    }
+
 }
