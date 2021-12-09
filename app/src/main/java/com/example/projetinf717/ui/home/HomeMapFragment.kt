@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,8 @@ import java.io.IOException
 import java.util.*
 import android.app.Activity
 import android.content.Context
+import androidx.lifecycle.Observer
+
 
 import androidx.core.app.ActivityCompat
 
@@ -38,10 +39,14 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 
 
 
+import androidx.lifecycle.ViewModelProvider
+import org.json.JSONObject
 
 
 class HomeMapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
+    private lateinit var homeMapViewModel: HomeMapViewModel
+
     private var _binding: FragmentHomeMapBinding? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val binding get() = _binding!!
@@ -51,18 +56,21 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        homeMapViewModel = ViewModelProvider(this).get(HomeMapViewModel::class.java)
         // Inflate the layout for this fragment
         _binding = FragmentHomeMapBinding.inflate(inflater, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
+        homeMapViewModel.getAction().observe(viewLifecycleOwner, Observer<Action> { action -> action?.let { handleAction(it) } })
         checkAndRequestPermissions()
 
         binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
+
         }
 
-        val sherbrooke = LatLng(45.0, -31.0)
-        marker = MarkerOptions().position(sherbrooke)
+        binding.button.setOnClickListener {
+            loadHousesAroundCity(binding.editTextTextPersonName.text.toString())
+        }
 
         val root: View = binding.root
 
@@ -76,12 +84,30 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment?.getMapAsync(this)
     }
 
+    private fun loadHousesAroundCity(name: String){
+        homeMapViewModel.displayHomesByCity(name)
+        val geocoder: Geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            val addresses: List<Address> =
+                geocoder.getFromLocationName(name, 1)
+            if (addresses.isNotEmpty()) {
+                val latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                val markerOptions: MarkerOptions = MarkerOptions()
+                markerOptions.title(name)
+                markerOptions.position(latLong)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerOptions.position, 12F))
+
+            }
+        }catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
     @SuppressLint("MissingPermission")
-    fun getLastKnownLocation() {
+    private fun getLastKnownLocation() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location->
                 if (location != null) {
-                    Toast.makeText(context,"Votre position", Toast.LENGTH_SHORT).show();
+                    homeMapViewModel.displayHomesByArea(location.latitude, location.longitude)
                     var latLng : LatLng = LatLng(location.latitude, location.longitude)
                     marker = MarkerOptions()
                         .position(latLng )
@@ -102,6 +128,29 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+    private fun handleAction(action: Action) {
+        if(this::mMap.isInitialized){
+            when (action.value) {
+                Action.HOMES_LOADED -> {
+                    val homeArray = homeMapViewModel.homesArray
+                    for(i in 0 until homeArray.length()){
+                        val obj: JSONObject = homeArray[i] as JSONObject
+                        val latLong = JSONObject(obj.get("latlong").toString())
+                        val position =  LatLng(latLong.getDouble("latitude"), latLong.getDouble("longitude"))
+                        marker = MarkerOptions()
+                            .position(position)
+                            .title(obj.get("title").toString())
+                        mMap.addMarker(marker)
+
+                    }
+                }
+                Action.NETWORK_ERROR -> {
+                    Toast.makeText(context,"An error occurred while requesting for houses", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }
+    }
     private fun BitmapFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         // below line is use to generate a drawable.
         val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
@@ -132,7 +181,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         // after generating our bitmap we are returning our bitmap.
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
-    fun checkAndRequestPermissions(): Boolean {
+
+    private fun checkAndRequestPermissions(): Boolean {
         val internet = context?.let {
             ContextCompat.checkSelfPermission(
                 it,
@@ -161,7 +211,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         if (loc2 != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
-        if (!listPermissionsNeeded.isEmpty()) {
+        if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
                 (context as Activity?)!!,
                 listPermissionsNeeded.toTypedArray(),

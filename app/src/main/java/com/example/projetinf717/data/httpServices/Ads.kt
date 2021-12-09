@@ -1,6 +1,6 @@
 package com.example.projetinf717.data.httpServices
 
-import android.net.Uri
+import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -9,7 +9,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.projetinf717.Application
 import com.example.projetinf717.classes.Housing
-import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
 
 import java.lang.StringBuilder
@@ -26,13 +25,47 @@ class Ads {
         val queue = Volley.newRequestQueue(Application.appContext)
         val url = "http://" + Application.IP + "/houses"
 
-        val jsonRequest = JsonArrayRequest(
+        val jsonRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
                 callback.onSuccess(response)
 
             },
             { _ ->
+                callback.onError()
+            })
+        queue.add(jsonRequest)
+
+    }
+
+    fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://" + Application.IP + "/housings/city/"+city
+
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                callback.onSuccess(response)
+            },
+            { _ ->
+                callback.onError()
+            })
+        queue.add(jsonRequest)
+
+    }
+
+    fun getHousesArroundMe(latitude: Double, longitude: Double, callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://" + Application.IP + "/housings/area/"+longitude+"&"+latitude+"&"+20
+
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                callback.onSuccess(response)
+            },
+            { err ->
+                Toast.makeText(Application.appContext,err.toString(), Toast.LENGTH_SHORT).show();
+
                 callback.onError()
             })
         queue.add(jsonRequest)
