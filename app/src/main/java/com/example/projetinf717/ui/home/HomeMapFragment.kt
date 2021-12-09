@@ -41,6 +41,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 
 import androidx.lifecycle.ViewModelProvider
 import org.json.JSONObject
+import android.content.Intent
+import android.net.Uri
+
+import com.google.android.gms.maps.model.Marker
+
+
+
 
 
 class HomeMapFragment : Fragment(), OnMapReadyCallback {
@@ -120,8 +127,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                         })
                     mMap.addMarker(marker)
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 12F))
-                }else{
-                    Toast.makeText(context,"Marche pas", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -223,8 +228,13 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
-
+    /*fun onMarkerClick(marker: Marker): Boolean {
+        if (marker == myMarker) {
+            val uriUrl: Uri = Uri.parse(hashmap.get(myMarker))
+            val launchBrowser = Intent(Intent.ACTION_VIEW, id)
+            startActivity(launchBrowser)
+        }
+    }*/
 
 
     override fun onMapReady(googleMap: GoogleMap) {

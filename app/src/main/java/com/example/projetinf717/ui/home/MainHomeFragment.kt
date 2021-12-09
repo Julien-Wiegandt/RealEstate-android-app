@@ -56,7 +56,6 @@ class MainHomeFragment : Fragment() {
     }
 
     override fun onResume() {
-        Toast.makeText(Application.appContext,Application.homeListOrMap.toString(), Toast.LENGTH_SHORT).show();
         binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
         binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
         super.onResume()
