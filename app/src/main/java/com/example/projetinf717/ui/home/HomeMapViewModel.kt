@@ -8,9 +8,8 @@ import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import org.json.JSONArray
 import org.json.JSONObject
 
-class HomeViewModel : ViewModel() {
+class HomeMapViewModel: ViewModel() {
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
-
     var homesArray = JSONArray()
 
     fun getAction(): LiveData<Action> {
@@ -18,37 +17,36 @@ class HomeViewModel : ViewModel() {
     }
     private val ads = Ads()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-
-    fun displayHomes(){
+    fun displayHomesByCity(city: String){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccess(result: JSONObject) {
-                if (result != null) {
-                    homesArray = result.get("housings") as JSONArray
-                }
+                homesArray = result.get("housings") as JSONArray
                 showDataLoaded()
             }
             override fun onError() {
                 showNetworkError()
             }
         }
-        ads.getHouses(cb)
+        ads.getHousesByCity(city, cb)
     }
 
+    fun displayHomesByArea(latitude: Double, longitude: Double){
+        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+            override fun onSuccess(result: JSONObject) {
+                homesArray = result.get("housings") as JSONArray
+                showDataLoaded()
+            }
+            override fun onError() {
+                showNetworkError()
+            }
+        }
+        ads.getHousesArroundMe(latitude,longitude,cb)
+    }
     private fun showDataLoaded() {
         mAction.value = Action(Action.HOMES_LOADED)
 
     }
     private fun showNetworkError() {
         mAction.value = Action(Action.NETWORK_ERROR)
-    }
-}
-
-class Action(val value: Int) {
-    companion object {
-        const val HOMES_LOADED = 0
-        const val NETWORK_ERROR = 1
     }
 }

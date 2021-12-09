@@ -1,5 +1,6 @@
 package com.example.projetinf717.ui.ads
 
+import AddAdsFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.projetinf717.databinding.FragmentAdsBinding
-import com.example.projetinf717.ui.addads.AddAdsFragment
 
 
 class AdsFragment : Fragment() {

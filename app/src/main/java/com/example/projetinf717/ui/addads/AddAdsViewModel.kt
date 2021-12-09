@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projetinf717.Application
+import com.example.projetinf717.classes.Housing
 import com.example.projetinf717.data.httpServices.Ads
 import com.example.projetinf717.data.httpServices.VolleyCallbackJsonObject
 import com.google.android.gms.maps.model.LatLng
@@ -28,53 +29,80 @@ class AddAdsViewModel : ViewModel() {
         return mAction
     }
 
-
-    fun createAd(title: String, street: String,city: String,codePostal: String,country: String,desc : String,estateType: String,
-                   estatePrice: String, numberBath: String, numberBed: String,
-                   email: String, phone: String, rent: Boolean
-    ){
+    fun createAd(housing: Housing, b64Image: String) {
         val latLong: LatLng
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(housing.email).matches()) {
             showBadMail()
-        }else{
-            val address = "$street, $codePostal, $city, $country"
+        } else {
+            val address =
+                "${housing.street}, ${housing.postalCode}, ${housing.city}, ${housing.country}"
             val addressToLatLong: List<Address> =
                 geocoder.getFromLocationName(address, 1)
-
-            if(addressToLatLong.isNotEmpty()) {
+            println("GEOCODER")
+            println(addressToLatLong)
+            if (addressToLatLong.isNotEmpty()) {
                 latLong = LatLng(addressToLatLong[0].latitude, addressToLatLong[0].longitude)
-                val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
+                housing.latLong = latLong
+                val uploadImageCb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
                     override fun onSuccess(result: JSONObject?) {
-                        showAdsCreated()
+                        val addHousingCb: VolleyCallbackJsonObject =
+                            object : VolleyCallbackJsonObject {
+                                override fun onSuccess(result: JSONObject?) {
+                                    showAdsCreated()
+                                }
+
+                                override fun onError() {
+                                    showInvalidArguments()
+                                }
+                            }
+                        println("onSuccess")
+                        var valid = false
+                        if (result != null) {
+                            val data = result.get("data") as JSONObject?
+                            if (data != null) {
+                                val imgUrl = data.get("url") as String?
+                                if (imgUrl != null) {
+                                    valid = true
+                                    println(imgUrl)
+                                    housing.imgPath = imgUrl
+                                    ads.createAd(housing, addHousingCb)
+                                }
+                            }
+                        }
+                        if (!valid) {
+                            showInvalidArguments()
+                        }
                     }
+
                     override fun onError() {
                         showInvalidArguments()
                     }
                 }
-                ads.createAd(title,street,city,codePostal,country,desc,estateType,estatePrice,numberBath,numberBed
-                    ,email,phone, rent, latLong, cb)
-            }else{
+                ads.hostImage(b64Image, uploadImageCb)
+            } else {
                 showBadAddress()
             }
         }
 
 
-
     }
+
     private fun showInvalidArguments() {
         mAction.value = Action(Action.SHOW_INVALID_FORM)
     }
+
     private fun showAdsCreated() {
         mAction.value = Action(Action.SHOW_AD_CREATED)
     }
+
     private fun showBadAddress() {
         mAction.value = Action(Action.SHOW_BAD_ADDRESS)
     }
+
     private fun showBadMail() {
         mAction.value = Action(Action.SHOW_BAD_MAIL)
     }
 }
-
 
 
 class Action(val value: Int) {
