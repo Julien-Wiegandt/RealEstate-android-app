@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.example.projetinf717.data.httpServices.Ads
 import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import org.json.JSONArray
+import org.json.JSONObject
 
 class HomeViewModel : ViewModel() {
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
+
     var homesArray = JSONArray()
 
     fun getAction(): LiveData<Action> {
