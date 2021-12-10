@@ -111,6 +111,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
     @SuppressLint("MissingPermission")
     private fun getLastKnownLocation() {
+        mMap.clear()
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location->
                 if (location != null) {
@@ -127,6 +128,9 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                         })
                     mMap.addMarker(marker)
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 12F))
+                }else{
+                    Toast.makeText(context,"nique", Toast.LENGTH_SHORT).show();
+
                 }
 
             }

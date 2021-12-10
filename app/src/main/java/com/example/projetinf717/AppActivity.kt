@@ -1,10 +1,12 @@
 package com.example.projetinf717
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.projetinf717.data.utils.TokenUtils
 import com.example.projetinf717.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
