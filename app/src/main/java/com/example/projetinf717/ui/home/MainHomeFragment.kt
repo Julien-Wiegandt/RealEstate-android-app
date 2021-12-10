@@ -17,7 +17,9 @@ import com.example.projetinf717.databinding.FragmentMainHomeBinding
 
 class MainHomeFragment : Fragment() {
     private var _binding: FragmentMainHomeBinding? = null
-    private lateinit var uiHandler : Handler
+
+    val homeFragment = HomeFragment()
+    val homeMapFragment = HomeMapFragment()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,60 +32,35 @@ class MainHomeFragment : Fragment() {
         _binding = FragmentMainHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        uiHandler = Handler()
-
-
-        val fragmentTransaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.mainHomeLayout, HomeFragment(), "LIST")
-        fragmentTransaction.add(R.id.mainHomeLayout, HomeMapFragment(), "MAP")
-        fragmentTransaction.commit()
+        val transaction = parentFragmentManager.beginTransaction()
+        switchToList()
 
         binding.listOrMapSwitch.setOnCheckedChangeListener{_, isChecked ->
             if(isChecked){
-                Application.homeListOrMap = true
-                uiHandler.post(Runnable { switchToMap() })
+                switchToMap()
             }else{
-                Application.homeListOrMap = false
-                uiHandler.post(Runnable { switchToList() })
+                switchToList()
             }
         }
         return root
     }
 
-    override fun onResume() {
-        binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
-        binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
-        super.onResume()
-        if(Application.homeListOrMap){
-            uiHandler.post(Runnable { switchToMap() })
-        }else{
-            uiHandler.post(Runnable { switchToList() })
-        }
-    }
-
     private fun switchToList() {
-        val fragA: Fragment = requireActivity().supportFragmentManager.findFragmentByTag("LIST") as Fragment
-        val fragmentTransaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-        requireActivity().supportFragmentManager.findFragmentByTag("MAP")
-            ?.let { fragmentTransaction.detach(it) }
-        fragmentTransaction.attach(fragA)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commitAllowingStateLoss()
-        requireActivity().supportFragmentManager.executePendingTransactions()
+
+        val transaction = parentFragmentManager.beginTransaction()
+        Application.homeListOrMap = false
+        transaction.replace(R.id.mainHomeLayout, homeFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun switchToMap() {
-        val fragB: Fragment = requireActivity().supportFragmentManager.findFragmentByTag("MAP") as Fragment
-        val fragmentTransaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-        requireActivity().supportFragmentManager.findFragmentByTag("LIST")
-            ?.let { fragmentTransaction.detach(it) }
-        fragmentTransaction.attach(fragB)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commitAllowingStateLoss()
-        requireActivity().supportFragmentManager.executePendingTransactions()
+
+        val transaction = parentFragmentManager.beginTransaction()
+        Application.homeListOrMap = true
+        transaction.replace(R.id.mainHomeLayout, homeMapFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onDestroyView() {
