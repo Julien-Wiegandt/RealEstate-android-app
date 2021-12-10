@@ -36,12 +36,6 @@ class AppActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Application.activityResumed()
-        val isExpired : Boolean = TokenUtils.checkIfExpired()
-        if(!isExpired){
-            val appActivityIntent = Intent(applicationContext, AppActivity::class.java)
-            startActivity(appActivityIntent)
-            this.finish()
-        }
     }
 
     override fun onPause() {
