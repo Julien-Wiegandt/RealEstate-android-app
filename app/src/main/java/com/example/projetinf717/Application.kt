@@ -8,11 +8,12 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.projetinf717.data.services.NotificationsService
+import com.example.projetinf717.data.utils.TokenUtils
 import kotlin.random.Random
 
 class Application : Application() {
     companion object{
-        var IP = "10.238.67.214:3000/api"
+        var IP = "192.168.0.27:3000/api"
         var JWT: String? = null
         var appContext: Context? = null
         var agencyMode = false
@@ -24,21 +25,12 @@ class Application : Application() {
             idNotifs += 1
             return idNotifs
         }
-        private var ID : String? = null
-        private fun generateID() : String{
-            val alphabet = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789"
-            val length = alphabet.length -1
-            var key = ""
-            for(i in 0..10){
-                val indice = Random.nextInt(0, length)
-                key+=alphabet[indice]
-            }
-            return key
-        }
+        private var ID : Int? = null
 
-        fun getID(): String?{
+
+        fun getID(): Int?{
             if(ID === null){
-                ID = generateID()
+                ID = TokenUtils.getId()
             }
             return ID
         }

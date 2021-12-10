@@ -92,7 +92,7 @@ class NotificationsService : Service() {
         val jsonObj = JSONObject()
         jsonObj.put("userId",Application.getID())
         mSocket.emit("login", jsonObj)
-        mSocket.on("bets",onResultBet)
+        mSocket.on("newAd",onResultBet)
         return START_STICKY
     }
 
