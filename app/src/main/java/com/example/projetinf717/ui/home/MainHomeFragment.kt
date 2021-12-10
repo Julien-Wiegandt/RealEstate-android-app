@@ -19,8 +19,6 @@ class MainHomeFragment : Fragment() {
     private var _binding: FragmentMainHomeBinding? = null
     private lateinit var uiHandler : Handler
 
-
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -40,8 +38,6 @@ class MainHomeFragment : Fragment() {
         fragmentTransaction.add(R.id.mainHomeLayout, HomeFragment(), "LIST")
         fragmentTransaction.add(R.id.mainHomeLayout, HomeMapFragment(), "MAP")
         fragmentTransaction.commit()
-
-
 
         binding.listOrMapSwitch.setOnCheckedChangeListener{_, isChecked ->
             if(isChecked){
@@ -94,5 +90,4 @@ class MainHomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

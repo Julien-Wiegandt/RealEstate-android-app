@@ -1,5 +1,6 @@
 package com.example.projetinf717.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,12 +24,14 @@ class HomeViewModel : ViewModel() {
     }
 
     fun displayHomes(){
+        Log.d("JU", "displayHomes")
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
                 // Not used
             }
             override fun onSuccessArray(result: JSONArray) {
                 if (result != null) {
+                    Log.d("JU", "homesArray = result")
                     homesArray = result
                 }
                 showDataLoaded()
@@ -38,9 +41,11 @@ class HomeViewModel : ViewModel() {
             }
         }
         ads.getHouses(cb)
+
     }
 
     private fun showDataLoaded() {
+        Log.d("JU", "showDataLoaded")
         mAction.value = Action(Action.HOMES_LOADED)
 
     }
