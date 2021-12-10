@@ -46,6 +46,14 @@ import android.net.Uri
 import android.util.Log
 
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.CameraUpdateFactory
+
+import com.google.android.gms.maps.CameraUpdate
+
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener
+
+
+
 
 
 
@@ -71,9 +79,9 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         homeMapViewModel.getAction().observe(viewLifecycleOwner, Observer<Action> { action -> action?.let { handleAction(it) } })
         checkAndRequestPermissions()
 
-        binding.floatingActionButton.setOnClickListener{
+        /*binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
-        }
+        }*/
 
         binding.button.setOnClickListener {
             loadHousesAroundCity(binding.editTextTextPersonName.text.toString())
@@ -116,21 +124,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { location->
                 if (location != null) {
                     homeMapViewModel.displayHomesByArea(location.latitude, location.longitude)
-                    var latLng : LatLng = LatLng(location.latitude, location.longitude)
-                    marker = MarkerOptions()
-                        .position(latLng )
-                        .title("Ma position")
-                        .icon(context?.let {
-                            BitmapFromVector(
-                                it,
-                                R.drawable.ic_baseline_my_location_24
-                            )
-                        })
-                    mMap.addMarker(marker)
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 12F))
-                }else{
-                    Toast.makeText(context,"nique", Toast.LENGTH_SHORT).show();
-
+                    val latLng : LatLng = LatLng(location.latitude, location.longitude)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12F))
                 }
 
             }
@@ -241,73 +236,19 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }*/
 
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        mMap.isMyLocationEnabled = true;
         getLastKnownLocation()
-        /*val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
-
-        /*var geocoder: Geocoder = Geocoder(context, Locale.getDefault())
-        try {
-            var addresses: List<Address> =
-                geocoder.getFromLocationName("209 passage Garibaldi, Aix les Bains, france", 1)
-            var addresses2: List<Address> =
-                geocoder.getFromLocationName("50 route de st innocent, Aix les Bains, france", 1)
-            if(addresses2.isNotEmpty()){
-                var latLong: LatLng = LatLng(addresses2[0].latitude, addresses2[0].longitude)
-                var markerOptions: MarkerOptions = MarkerOptions()
-                markerOptions.title("Chateau Misser")
-                markerOptions.position(latLong)
-                mMap?.addMarker(markerOptions)
-            }
-
-            var addresses3: List<Address> =
-                geocoder.getFromLocationName("12 rue vaissiere, Montpellier, france", 1)
-            if(addresses3.isNotEmpty()){
-                var latLong: LatLng = LatLng(addresses3[0].latitude, addresses3[0].longitude)
-                var markerOptions: MarkerOptions = MarkerOptions()
-                markerOptions.title("Chateau Misser")
-                markerOptions.position(latLong)
-                mMap?.addMarker(markerOptions)
-            }
-
-            var addresses4: List<Address> =
-                geocoder.getFromLocationName("955 rue kitchener, Canada, quebec, sherbrooke", 1)
-            if(addresses4.isNotEmpty()){
-                var latLong: LatLng = LatLng(addresses4[0].latitude, addresses4[0].longitude)
-                var markerOptions: MarkerOptions = MarkerOptions()
-                markerOptions.title("Chateau Misser")
-                markerOptions.position(latLong)
-                mMap?.addMarker(markerOptions)
-            }
-
-            var addresses5: List<Address> =
-                geocoder.getFromLocationName("tour eiffel, paris", 1)
-            if(addresses5.isNotEmpty()){
-                var latLong: LatLng = LatLng(addresses5[0].latitude, addresses5[0].longitude)
-                var markerOptions: MarkerOptions = MarkerOptions()
-                markerOptions.title("Chateau Misser")
-                markerOptions.position(latLong)
-                mMap?.addMarker(markerOptions)
-            }
-
-            if (addresses.isNotEmpty()) {
-                var latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
-                var markerOptions: MarkerOptions = MarkerOptions()
-                markerOptions.title("Chateau Misser")
-                markerOptions.position(latLong)
-                mMap?.addMarker(markerOptions)
-                var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                    latLong,
-                    5F
-                )
-                mMap?.animateCamera(cameraUpdate)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }*/
+        mMap.setOnMyLocationButtonClickListener {
+            mMap.clear()
+            val ll = LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude)
+            val update = CameraUpdateFactory.newLatLngZoom(ll, 12F)
+            mMap.animateCamera(update)
+            homeMapViewModel.displayHomesByArea(mMap.myLocation.latitude, mMap.myLocation.longitude)
+            false
+        }
     }
 
 
