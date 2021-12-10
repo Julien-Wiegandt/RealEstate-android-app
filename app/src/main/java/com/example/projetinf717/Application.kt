@@ -6,12 +6,13 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.projetinf717.data.services.NotificationsService
 import kotlin.random.Random
 
 class Application : Application() {
     companion object{
-        var IP = "192.168.97.164:3000/api"
+        var IP = "10.238.67.214:3000/api"
         var JWT: String? = null
         var appContext: Context? = null
         var agencyMode = false
@@ -62,8 +63,8 @@ class Application : Application() {
         appContext = applicationContext
         createNotificationChannel()
         val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         startService(serviceIntent)
-
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.projetinf717.data.httpServices
 
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -21,21 +22,34 @@ class Ads {
         "s2retfgsGSRFsERFGHfgdfgw734yhFHW567TYHSrf4yarg" //This the boundary which is used by the server to split the post parameters.
     private var MULTIPART_FORMDATA = "multipart/form-data;boundary=$BOUNDARY"
 
-    fun getHouses( callback: VolleyCallbackAds) {
+    fun getHouse(callback: VolleyCallbackAds, id: Int){
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/houses"
+        val url = "http://" + Application.IP + "/housings/" + id.toString()
 
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
-                callback.onSuccess(response)
-
+                callback.onSuccessObject(response)
             },
-            { _ ->
+            { err ->
                 callback.onError()
             })
         queue.add(jsonRequest)
+    }
 
+    fun getHouses( callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://" + Application.IP + "/housings"
+
+        val jsonRequest = JsonArrayRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                callback.onSuccessArray(response)
+            },
+            { err ->
+                callback.onError()
+            })
+        queue.add(jsonRequest)
     }
 
     fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
@@ -45,7 +59,7 @@ class Ads {
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
-                callback.onSuccess(response)
+                callback.onSuccessObject(response)
             },
             { _ ->
                 callback.onError()
@@ -61,7 +75,7 @@ class Ads {
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
-                callback.onSuccess(response)
+                callback.onSuccessObject(response)
             },
             { err ->
                 Toast.makeText(Application.appContext,err.toString(), Toast.LENGTH_SHORT).show();
@@ -131,10 +145,7 @@ class Ads {
                 return params
             }
         }
-
         queue.add(jsonRequest)
-
-
     }
 
 }

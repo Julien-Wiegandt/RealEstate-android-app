@@ -13,7 +13,7 @@
         android:layout_height="180dp"
         android:contentDescription="@string/imageContentDescription"
         android:scaleType="centerCrop"
-        android:src="@drawable/unsplash_house1"
+        android:src="@drawable/default_img_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="$ 240 000"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -38,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="2500 Boulevard de l'Université, Sherbrooke, Canada"
         android:textColor="@color/greyLight"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,10 +50,13 @@
         android:background="@android:color/transparent"
         android:insetTop="0dp"
         android:insetBottom="0dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/adDetailsTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adDetailsImage"
-        app:srcCompat="@drawable/fav_icon" />
+        app:srcCompat="@drawable/fav_icon"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
     <ImageView
@@ -75,7 +76,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="1"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/adDetailsBedImg"
         app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
@@ -97,7 +97,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="1"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/adDetailsBathImg"
         app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
@@ -119,7 +118,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="0"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/adDetailsCarImg"
         app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
@@ -141,7 +139,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="Apartment"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/adDetailsVerticalLine"
@@ -152,7 +149,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="For sell $240,000 !"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -169,7 +165,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:justificationMode="inter_word"
-        android:text="Appartement lumineux en plein centre de Sherbrooke. Emplacement proche des transports en communs. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +192,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="+1 438 902 9800"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/adDetailsPhoneIcon"
@@ -226,7 +220,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="century21@gmail.com"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/adDetailsEmailIcon"
@@ -242,6 +235,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/map_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adDetailsDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsDescription"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

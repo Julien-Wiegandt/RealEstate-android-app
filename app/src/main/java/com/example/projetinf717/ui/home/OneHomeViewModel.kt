@@ -8,12 +8,12 @@ import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import org.json.JSONArray
 import org.json.JSONObject
 
-class HomeViewModel : ViewModel() {
-    private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
+class OneHomeViewModel : ViewModel() {
+    private val mAction: MutableLiveData<OneHomeAction> = MutableLiveData<OneHomeAction>()
 
-    var homesArray = JSONArray()
+    var home = JSONObject()
 
-    fun getAction(): LiveData<Action> {
+    fun getAction(): LiveData<OneHomeAction> {
         return mAction
     }
     private val ads = Ads()
@@ -22,36 +22,36 @@ class HomeViewModel : ViewModel() {
         value = "This is home Fragment"
     }
 
-    fun displayHomes(){
+    fun displayHome(id : Int){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
-                // Not used
-            }
-            override fun onSuccessArray(result: JSONArray) {
                 if (result != null) {
-                    homesArray = result
+                    home = result
                 }
                 showDataLoaded()
+            }
+            override fun onSuccessArray(result: JSONArray) {
+                // Not used
             }
             override fun onError() {
                 showNetworkError()
             }
         }
-        ads.getHouses(cb)
+        ads.getHouse(cb, id)
     }
 
     private fun showDataLoaded() {
-        mAction.value = Action(Action.HOMES_LOADED)
-
+        mAction.value = OneHomeAction(OneHomeAction.HOME_LOADED)
     }
+
     private fun showNetworkError() {
-        mAction.value = Action(Action.NETWORK_ERROR)
+        mAction.value = OneHomeAction(OneHomeAction.NETWORK_ERROR)
     }
 }
 
-class Action(val value: Int) {
+class OneHomeAction(val value: Int) {
     companion object {
-        const val HOMES_LOADED = 0
+        const val HOME_LOADED = 0
         const val NETWORK_ERROR = 1
     }
 }

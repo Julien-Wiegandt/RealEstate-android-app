@@ -19,10 +19,16 @@ class HomeMapViewModel: ViewModel() {
 
     fun displayHomesByCity(city: String){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
-            override fun onSuccess(result: JSONObject) {
-                homesArray = result.get("housings") as JSONArray
+            override fun onSuccessObject(result: JSONObject) {
+                homesArray = result.getJSONObject("housings") as JSONArray
                 showDataLoaded()
             }
+
+            override fun onSuccessArray(result: JSONArray) {
+                homesArray = result
+                showDataLoaded()
+            }
+
             override fun onError() {
                 showNetworkError()
             }
@@ -32,10 +38,16 @@ class HomeMapViewModel: ViewModel() {
 
     fun displayHomesByArea(latitude: Double, longitude: Double){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
-            override fun onSuccess(result: JSONObject) {
+            override fun onSuccessObject(result: JSONObject) {
                 homesArray = result.get("housings") as JSONArray
                 showDataLoaded()
             }
+
+            override fun onSuccessArray(result: JSONArray) {
+                homesArray = result
+                showDataLoaded()
+            }
+
             override fun onError() {
                 showNetworkError()
             }

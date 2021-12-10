@@ -92,7 +92,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/btn_custom"
             android:text="@string/register"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/white" />
 
         <ImageView
             android:layout_width="30dp"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="@string/swipe_right_for_login"
             android:textSize="15sp"
-            android:textColor="@color/colorPrimaryVariant"
+            android:textColor="@color/redLight"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"/>

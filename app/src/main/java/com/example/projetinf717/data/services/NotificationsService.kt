@@ -24,8 +24,6 @@ class NotificationsService : Service() {
     }
     private lateinit var mSocket: Socket
 
-
-
     override fun onCreate() {
         super.onCreate()
 
@@ -71,8 +69,6 @@ class NotificationsService : Service() {
 
 
     private fun createNotification(title: String, text: String, intent: Intent, id: Int){
-
-
         if(Application.isActivityVisible()){
             Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show();
         }else{

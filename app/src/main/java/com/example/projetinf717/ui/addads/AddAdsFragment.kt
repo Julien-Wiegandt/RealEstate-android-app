@@ -73,8 +73,6 @@ class AddAdsFragment : Fragment() {
         _binding = FragmentAddAdsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val imageView: ImageView = binding.imageView
-
         val imgAddButton: ImageButton = binding.imgAddButton
         val locationButton: ImageButton = binding.locationButton
         val imageButtonBed: ImageButton = binding.imageButtonBed
@@ -145,27 +143,6 @@ class AddAdsFragment : Fragment() {
             }
         }
 
-
-
-
-        // Binding views
-//        binding.imageView
-//        binding.editTextTitle
-//        binding.editTextAddress
-//        binding.locationButton
-//        binding.editTextDescription
-//        binding.editTextEstateType
-//        binding.editTextEstatePrice
-//        binding.switchRent
-//        binding.imageButtonBed
-//        binding.editTextNumberBed
-//        binding.imageButtonBathroom
-//        binding.editTextNumberBathroom
-//        binding.imageButtonGarage
-//        binding.editTextNumberGarage
-//        binding.editTextEmail
-//        binding.editTextPhone
-//        binding.createAdsButton
         binding.imgAddButton.setOnClickListener{
             openActivityForResult()
         }
