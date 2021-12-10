@@ -37,6 +37,7 @@
     <!-- profile strings -->
     <string name="profileImageContentDescription">Your profile</string>
     <string name="profileAgencySwicth">Agency</string>
+    <string name="profileNotificationSwicth">Allow notifications</string>
     <string name="profileUpdatePasswordButton">Update password</string>
     <!-- Map strings -->
     <string name="editTextSearchHint">Search</string>

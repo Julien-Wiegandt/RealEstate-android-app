@@ -16,25 +16,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    Next fav feature-->
+<!--    <Switch-->
+<!--        android:id="@+id/profileSwitchAgency"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:text="@string/profileAgencySwicth"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />-->
+
     <Switch
-        android:id="@+id/profileSwitchAgency"
+        android:id="@+id/profileSwitchAllowNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/profileAgencySwicth"
+        android:layout_marginTop="32dp"
+        android:text="@string/profileNotificationSwicth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
 
     <TextView
         android:id="@+id/profileFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:text="Tim Hortons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileSwitchAgency" />
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <TextView
         android:id="@+id/profileEmail"
@@ -50,17 +61,17 @@
         android:id="@+id/profileEditTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/et_custom"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPersonName"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
         android:padding="8dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/profileSwitchAllowNotifications" />
 
     <EditText
         android:id="@+id/profileEditTextPasswordRetype"

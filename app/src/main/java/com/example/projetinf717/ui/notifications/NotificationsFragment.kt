@@ -37,15 +37,16 @@ class NotificationsFragment : Fragment() {
 
         val disconnectButton: Button = binding.btnDisconnect
 
-        binding.profileSwitchAgency.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
-                Application.agencyMode = true
-                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)
-            }else{
-                Application.agencyMode = false
-                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
-            }
-        }
+//        Next fav feature
+//        binding.profileSwitchAgency.setOnCheckedChangeListener{_, isChecked ->
+//            if(isChecked){
+//                Application.agencyMode = true
+//                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)
+//            }else{
+//                Application.agencyMode = false
+//                binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
+//            }
+//        }
 
         disconnectButton.setOnClickListener {
             Application.JWT = null
