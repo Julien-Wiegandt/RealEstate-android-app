@@ -41,6 +41,8 @@ class MainHomeFragment : Fragment() {
         fragmentTransaction.add(R.id.mainHomeLayout, HomeMapFragment(), "MAP")
         fragmentTransaction.commit()
 
+
+
         binding.listOrMapSwitch.setOnCheckedChangeListener{_, isChecked ->
             if(isChecked){
                 Application.homeListOrMap = true
@@ -51,6 +53,17 @@ class MainHomeFragment : Fragment() {
             }
         }
         return root
+    }
+
+    override fun onResume() {
+        binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
+        binding.listOrMapSwitch.isChecked = !binding.listOrMapSwitch.isChecked
+        super.onResume()
+        if(Application.homeListOrMap){
+            uiHandler.post(Runnable { switchToMap() })
+        }else{
+            uiHandler.post(Runnable { switchToList() })
+        }
     }
 
     private fun switchToList() {
