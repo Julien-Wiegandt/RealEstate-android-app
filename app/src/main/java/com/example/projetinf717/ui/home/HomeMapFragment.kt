@@ -128,6 +128,9 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                         })
                     mMap.addMarker(marker)
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 12F))
+                }else{
+                    Toast.makeText(context,"nique", Toast.LENGTH_SHORT).show();
+
                 }
 
             }

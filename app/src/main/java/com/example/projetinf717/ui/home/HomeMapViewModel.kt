@@ -20,7 +20,8 @@ class HomeMapViewModel: ViewModel() {
     fun displayHomesByCity(city: String){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
-                homesArray = result.getJSONObject("housings") as JSONArray
+                println(result)
+                homesArray = result.getJSONArray("housings") as JSONArray
                 showDataLoaded()
             }
 
