@@ -1,10 +1,12 @@
 package com.example.projetinf717
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.projetinf717.data.utils.TokenUtils
 import com.example.projetinf717.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -34,6 +36,12 @@ class AppActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Application.activityResumed()
+        val isExpired : Boolean = TokenUtils.checkIfExpired()
+        if(!isExpired){
+            val appActivityIntent = Intent(applicationContext, AppActivity::class.java)
+            startActivity(appActivityIntent)
+            this.finish()
+        }
     }
 
     override fun onPause() {

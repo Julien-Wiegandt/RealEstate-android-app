@@ -111,6 +111,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
     @SuppressLint("MissingPermission")
     private fun getLastKnownLocation() {
+        mMap.clear()
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location->
                 if (location != null) {
