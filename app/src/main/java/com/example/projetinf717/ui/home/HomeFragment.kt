@@ -1,24 +1,33 @@
 package com.example.projetinf717.ui.home
 
-import android.content.Context
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.DEBUG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.volley.VolleyLog.DEBUG
 import com.example.projetinf717.Application
+import com.example.projetinf717.BuildConfig.DEBUG
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentHomeBinding
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.Exception
 
 class HomeFragment : Fragment() {
 
@@ -60,6 +69,8 @@ class HomeFragment : Fragment() {
         homeViewModel.getAction()?.observe(viewLifecycleOwner,
             Observer<Action> { action -> action?.let { handleAction(it) } })
 
+        homeViewModel.displayHomes()
+
         swipeContainer = binding.swipeContainerAllHouses
 
         swipeContainer.setOnRefreshListener {
@@ -75,32 +86,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleAction(action: Action) {
-//        when (action.value) {
-//            Action.HOMES_LOADED -> {
-        // TEMP DATA
-        val tempHouseArray = JSONArray()
-        val house = JSONObject()
-        house.put("title", "Offer over ")
-        house.put("price", 240000)
-        house.put("city", "Sherbrooke")
-        house.put("street", "2500 Boulevard de l'Université")
-        tempHouseArray.put(house)
-        viewAdapter.swapDataSet(tempHouseArray)
-        Toast.makeText(context,tempHouseArray.toString(),Toast.LENGTH_SHORT).show();
-//                viewAdapter.swapDataSet(homeViewModel.homesArray)
-                swipeContainer.isRefreshing = true
-//            }
-//            Action.NETWORK_ERROR ->{
-//                if(Application.isActivityVisible()){
-//                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
-//                }
-//                swipeContainer.isRefreshing = false
-//            }
-//        }
+        when (action.value) {
+            Action.HOMES_LOADED -> {
+                viewAdapter.swapDataSet(homeViewModel.homesArray)
+                Toast.makeText(context, "Please wait for the images, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
+                swipeContainer.isRefreshing = false
+            }
+            Action.NETWORK_ERROR ->{
+                if(Application.isActivityVisible()){
+                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
+                }
+                swipeContainer.isRefreshing = false
+            }
+        }
     }
-
-
-
 }
 
 class MyAdapter(private var myDataset: JSONArray) :
@@ -120,7 +119,6 @@ class MyAdapter(private var myDataset: JSONArray) :
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list_house, parent, false)
 
-
         return ViewHolder(itemView)
     }
 
@@ -130,17 +128,33 @@ class MyAdapter(private var myDataset: JSONArray) :
         // - replace the contents of the view with that element
         val house = myDataset[position] as JSONObject
 
-        val title = house.getString("title")
-        val price = house.getInt("price")
-        val city = house.getString("city")
+        // Extract data from JSONObject
+        val id = house.getInt("id")
+        val price = house.getInt("estateprice")
         val street = house.getString("street")
+        val city = house.getString("city")
+        val country = house.getString("country")
+        val estateType = house.getString("estatetype")
+        val bedNumber = house.getInt("numberbed")
+        val bathNumber = house.getInt("numberbath")
+//        val carNumber = house.getInt("numberCar")
+        val rent = if (house.getBoolean("rent")) "rent" else "sell"
 
-        holder.item.findViewById<TextView>(R.id.title).text = title
+        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$"+price.toString()
+        holder.item.findViewById<TextView>(R.id.adItemAddress).text = street + ", " + city + ", " + country
+        holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = bedNumber.toString()
+        holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = bathNumber.toString()
+//        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
+        holder.item.findViewById<TextView>(R.id.adItemEstateType).text = estateType + " for " + rent
+
+        val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
+        OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
+
 
         holder.item.setOnClickListener {
-            val bundle = bundleOf("id" to position)
-            /*holder.item.findNavController().navigate(
-                R.id.action_title_to_house, bundle)*/
+            val bundle = bundleOf("id" to id)
+            holder.item.findNavController().navigate(
+                R.id.action_navigation_home_to_oneHomeFragment, bundle)
         }
     }
 

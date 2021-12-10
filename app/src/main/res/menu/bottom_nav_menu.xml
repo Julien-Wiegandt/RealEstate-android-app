@@ -9,11 +9,13 @@
     <item
         android:id="@+id/navigation_ads"
         android:icon="@drawable/ant_design_home_outlined"
+        android:tint="@color/grey"
         android:title="@string/title_ads" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/line_md_account"
+        android:tint="@color/grey"
         android:title="@string/title_profile" />
 
 </menu>

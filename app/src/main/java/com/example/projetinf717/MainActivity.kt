@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(appActivityIntent)
             this.finish()
         }
-
     }
 
     class AuthenticationStateAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {

@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.projetinf717.ui.home.MainHomeFragment"
         android:label="@string/title_real_estate"
-        tools:layout="@layout/fragment_main_home" />
+        tools:layout="@layout/fragment_main_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_oneHomeFragment"
+            app:destination="@id/oneHomeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_ads"
@@ -22,4 +26,9 @@
         android:name="com.example.projetinf717.ui.notifications.NotificationsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/oneHomeFragment"
+        android:name="com.example.projetinf717.ui.home.OneHomeFragment"
+        android:label="fragment_one_home"
+        tools:layout="@layout/fragment_one_home" />
 </navigation>

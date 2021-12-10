@@ -43,6 +43,7 @@ import androidx.lifecycle.ViewModelProvider
 import org.json.JSONObject
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 
 import com.google.android.gms.maps.model.Marker
 
@@ -72,7 +73,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
 
         binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
-
         }
 
         binding.button.setOnClickListener {
