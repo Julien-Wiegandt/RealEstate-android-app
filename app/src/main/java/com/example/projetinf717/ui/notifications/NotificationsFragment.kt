@@ -8,13 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.projetinf717.AppActivity
 import com.example.projetinf717.Application
 import com.example.projetinf717.MainActivity
 import com.example.projetinf717.R
 import com.example.projetinf717.databinding.FragmentNotificationsBinding
+import com.example.projetinf717.ui.notifications.Action
 
 class NotificationsFragment : Fragment() {
 
@@ -32,6 +36,8 @@ class NotificationsFragment : Fragment() {
     ): View? {
         notificationsViewModel =
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        notificationsViewModel.getAction()?.observe(viewLifecycleOwner,
+            Observer<Action?> { action -> action?.let { handleAction(it) } })
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -53,6 +59,12 @@ class NotificationsFragment : Fragment() {
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
             }
         }
+        binding.profileButtonPasswordUpdate.setOnClickListener {
+            binding.profileButtonPasswordUpdate.isEnabled = false
+            val password : String = binding.profileEditTextPassword.text.toString()
+            val repassword : String = binding.profileEditTextPasswordRetype.text.toString()
+            notificationsViewModel.changePassword(password,repassword)
+        }
 
         disconnectButton.setOnClickListener {
             Application.JWT = null
@@ -71,6 +83,23 @@ class NotificationsFragment : Fragment() {
 //            textView.text = it
 //        })
         return root
+    }
+
+    private fun handleAction(action: Action) {
+        when (action.value) {
+            Action.SHOW_SUCCESS -> {
+                binding.profileButtonPasswordUpdate.isEnabled = true
+                Toast.makeText(context,"Password changed", Toast.LENGTH_SHORT).show();
+            }
+            Action.SHOW_ERROR -> {
+                binding.profileButtonPasswordUpdate.isEnabled = true
+                Toast.makeText(context,"Error from server", Toast.LENGTH_SHORT).show();
+            }
+            Action.SHOW_ERROR_MUST_CORRESPOND -> {
+                binding.profileButtonPasswordUpdate.isEnabled = true
+                Toast.makeText(context,"Passwords must correspond", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     override fun onDestroyView() {
