@@ -93,9 +93,6 @@ class OneAdFragment : Fragment() {
     @SuppressLint("StaticFieldLeak")
     @Suppress("DEPRECATION")
     class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
-//        init {
-//            Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
-//        }
         override fun doInBackground(vararg urls: String): Bitmap? {
             val imageURL = urls[0]
             var image: Bitmap? = null
