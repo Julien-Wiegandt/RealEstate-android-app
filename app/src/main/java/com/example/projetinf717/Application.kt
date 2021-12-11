@@ -15,7 +15,7 @@ import kotlin.random.Random
 
 class Application : Application() {
     companion object{
-        var IP = "192.168.0.20:3000/api"
+        var IP = "10.238.67.214:3000/api"
         var IPSocket = IP.split(":")[0]
         var JWT: String? = null
         var appContext: Context? = null
