@@ -27,19 +27,19 @@ class AdsViewModel : ViewModel() {
     fun displayAds(){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
-                // Not used
-            }
-            override fun onSuccessArray(result: JSONArray) {
                 if (result != null) {
-                    adsArray = result
+                    adsArray = result.getJSONArray("housings") as JSONArray
                 }
                 showDataLoaded()
+            }
+            override fun onSuccessArray(result: JSONArray) {
+            // Not used
             }
             override fun onError() {
                 showNetworkError()
             }
         }
-        ads.getHouses(cb)
+        ads.getMyHouses(cb)
 
     }
 

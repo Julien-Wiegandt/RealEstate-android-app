@@ -29,7 +29,9 @@ class HomeViewModel : ViewModel() {
                 // Not used
             }
             override fun onSuccessArray(result: JSONArray) {
-                homesArray = result
+                if (result != null) {
+                    homesArray = result
+                }
                 showDataLoaded()
             }
             override fun onError() {

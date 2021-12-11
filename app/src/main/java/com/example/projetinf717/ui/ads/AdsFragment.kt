@@ -153,11 +153,11 @@ class MyAdapter(private var myDataset: JSONArray) :
         val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
         OneHomeFragment.DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
 
-//        holder.item.setOnClickListener {
-//            val bundle = bundleOf("id" to id)
-//            holder.item.findNavController().navigate(//TODO
-//                R.id.action_navigation_home_to_oneHomeFragment, bundle)
-//        }
+        holder.item.setOnClickListener {
+            val bundle = bundleOf("id" to id)
+            holder.item.findNavController().navigate(
+                R.id.action_navigation_ads_to_oneAdFragment, bundle)
+        }
     }
 
     fun swapDataSet(newData: JSONArray) {

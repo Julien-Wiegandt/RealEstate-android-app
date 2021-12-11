@@ -92,8 +92,7 @@ class HomeFragment : Fragment() {
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.HOMES_LOADED -> {
-                Toast.makeText(context, "LIST Please wait for the images, it may take a few seconds...", Toast.LENGTH_LONG).show()
-                Log.d("JU", homeViewModel.homesArray.toString())
+                Toast.makeText(context, "Please wait for the images, it may take a few seconds...", Toast.LENGTH_LONG).show()
                 viewAdapter.swapDataSet(homeViewModel.homesArray)
                 swipeContainer.isRefreshing = false
             }
@@ -158,6 +157,9 @@ class MyAdapter(private var myDataset: JSONArray) :
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
+            print("BUNDLE")
+            println(bundle)
+            println(R.id.action_navigation_home_to_oneHomeFragment)
             holder.item.findNavController().navigate(
                 R.id.action_navigation_home_to_oneHomeFragment, bundle)
         }

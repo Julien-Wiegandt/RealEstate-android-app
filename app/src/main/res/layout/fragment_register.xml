@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="44dp"
         android:text="@string/register"
         android:textAlignment="center"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/et_name"
@@ -27,7 +28,7 @@
         android:textColor="@color/greyDark"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="26dp"
         android:padding="15dp"
         android:inputType="textPersonName"
         android:background="@drawable/et_custom"
@@ -42,7 +43,7 @@
         android:textColor="@color/greyDark"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="26dp"
         android:padding="15dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/et_custom"
@@ -57,7 +58,7 @@
         android:textColor="@color/greyDark"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="26dp"
         android:padding="15dp"
         android:inputType="textPassword"
         android:background="@drawable/et_custom"
@@ -89,7 +90,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="80dp"
             android:background="@drawable/btn_custom"
             android:text="@string/register"
             android:textColor="@color/white" />
@@ -105,12 +106,12 @@
             android:id="@+id/swipeLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/swipe_right_for_login"
-            android:textSize="15sp"
-            android:textColor="@color/redLight"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:text="@string/swipe_right_for_login"
+            android:textColor="@color/redLight"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 

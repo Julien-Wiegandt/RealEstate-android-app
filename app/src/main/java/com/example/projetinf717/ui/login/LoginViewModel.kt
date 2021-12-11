@@ -10,7 +10,7 @@ import org.json.JSONObject
 
 class LoginViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "Real Estate login"
+        value = "Real Estate"
     }
     private val authentication = Authentication()
 

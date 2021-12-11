@@ -19,7 +19,11 @@
         android:id="@+id/navigation_ads"
         android:name="com.example.projetinf717.ui.ads.AdsFragment"
         android:label="@string/title_ads"
-        tools:layout="@layout/fragment_ads" />
+        tools:layout="@layout/fragment_ads" >
+        <action
+            android:id="@+id/action_navigation_ads_to_oneAdFragment"
+            app:destination="@id/oneAdFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -31,4 +35,9 @@
         android:name="com.example.projetinf717.ui.home.OneHomeFragment"
         android:label="fragment_one_home"
         tools:layout="@layout/fragment_one_home" />
+    <fragment
+        android:id="@+id/oneAdFragment"
+        android:name="com.example.projetinf717.ui.ads.OneAdFragment"
+        android:label="fragment_one_ad"
+        tools:layout="@layout/fragment_one_ad" />
 </navigation>
