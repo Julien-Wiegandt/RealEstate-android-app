@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.projetinf717.Application
@@ -36,8 +37,14 @@ class NotificationsFragment : Fragment() {
         val root: View = binding.root
 
         val disconnectButton: Button = binding.btnDisconnect
+        binding.profileSwitchAllowNotifications.isChecked = Application.allowNotifications
 
-        binding.profileSwitchAgency.setOnCheckedChangeListener{_, isChecked ->
+        binding.profileSwitchAllowNotifications.setOnCheckedChangeListener{_, isChecked ->
+            val sharedPreferences: SharedPreferences? =
+                Application.appContext?.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
+                val myEdit = sharedPreferences!!.edit()
+                myEdit.putBoolean("allowNotifs", isChecked)
+                myEdit.apply()
             if(isChecked){
                 Application.allowNotifications = true
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)

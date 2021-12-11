@@ -5,7 +5,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.projetinf717.data.services.NotificationsService
 import com.example.projetinf717.data.utils.TokenUtils
@@ -53,6 +55,8 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        val sharedPreferences : SharedPreferences = applicationContext.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
+        allowNotifications = sharedPreferences.getBoolean("allowNotifs",true)
         appContext = applicationContext
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
