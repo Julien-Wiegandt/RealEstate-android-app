@@ -89,7 +89,7 @@ class OneAdFragment : Fragment() {
                 binding.adDetailsDescription.setText(ad.getString("description"))
 
                 val img = binding.adDetailsImage
-                Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
                 DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
             }
             OneAdAction.NETWORK_ERROR -> {

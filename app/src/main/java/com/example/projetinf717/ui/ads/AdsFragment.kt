@@ -91,7 +91,7 @@ class AdsFragment : Fragment() {
     private fun handleAction(action: AdAction) {
         when (action.value) {
             AdAction.HOMES_LOADED -> {
-                Toast.makeText(context, "Please wait for the images, it may take a few seconds...", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, "Please wait for the images, it may take a few seconds...", Toast.LENGTH_LONG).show()
                 viewAdapter.swapDataSet(adsViewModel.adsArray)
                 swipeContainer.isRefreshing = false
             }

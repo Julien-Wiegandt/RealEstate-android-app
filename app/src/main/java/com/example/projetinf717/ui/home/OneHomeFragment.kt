@@ -79,7 +79,7 @@ class OneHomeFragment : Fragment() {
                 binding.adDetailsDescription.setText(home.getString("description"))
 
                 val img = binding.adDetailsImage
-                Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
                 DownloadImageFromInternet(img).execute(home.getString("imgpath"))
             }
             OneHomeAction.NETWORK_ERROR -> {
