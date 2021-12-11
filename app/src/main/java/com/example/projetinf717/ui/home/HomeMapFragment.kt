@@ -190,20 +190,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
-    fun onMarkerClick(marker: Marker): Boolean {
-        println(marker.tag)
-            /**
-        if (marker == myMarker) {
-            val uriUrl: Uri = Uri.parse(hashmap.get(myMarker))
-            val launchBrowser = Intent(Intent.ACTION_VIEW, id)
-            startActivity(launchBrowser)
-        }
-        **/
-        return true;
-    }
-
-
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
