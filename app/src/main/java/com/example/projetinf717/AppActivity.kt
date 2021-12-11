@@ -1,8 +1,13 @@
 package com.example.projetinf717
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -10,6 +15,7 @@ import com.example.projetinf717.data.services.NotificationsService
 import com.example.projetinf717.data.utils.TokenUtils
 import com.example.projetinf717.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.ArrayList
 
 class AppActivity : AppCompatActivity() {
 
@@ -17,10 +23,11 @@ class AppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkAndRequestPermissions()
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        /*val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
-        startService(serviceIntent)*/
+        val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
+        startService(serviceIntent)
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_app)
@@ -43,4 +50,45 @@ class AppActivity : AppCompatActivity() {
         super.onPause()
         Application.activityPaused()
     }
+
+    private fun checkAndRequestPermissions(): Boolean {
+        val internet = Application.appContext?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.INTERNET
+            )
+        }
+        val loc = Application.appContext?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        }
+        val loc2 = Application.appContext?.let {
+            ContextCompat.checkSelfPermission(
+                it,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        }
+        val listPermissionsNeeded: MutableList<String> = ArrayList()
+        if (internet != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.INTERNET)
+        }
+        if (loc != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (loc2 != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                (this)!!,
+                listPermissionsNeeded.toTypedArray(),
+                1
+            )
+            return false
+        }
+        return true
+    }
+
 }
