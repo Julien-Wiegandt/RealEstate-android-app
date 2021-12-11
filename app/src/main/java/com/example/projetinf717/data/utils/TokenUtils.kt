@@ -19,5 +19,17 @@ class TokenUtils {
             return true
         }
 
+        fun getId(): Int?{
+            val sharedPreferences: SharedPreferences? =
+                Application.appContext?.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
+            val token : String? = sharedPreferences?.getString("jwt", null)
+            return if(token != null) {
+                val jwt = JWT(token)
+                (jwt.getClaim("sub").asInt()!!)
+            }else{
+                null
+            }
+        }
+
     }
 }

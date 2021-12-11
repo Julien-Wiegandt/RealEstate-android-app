@@ -64,6 +64,11 @@ class HomeFragment : Fragment() {
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
         }
+        binding.homeSearchBtn.setOnClickListener {
+            if(binding.homeSearch.text.toString().isNotEmpty()){
+                homeViewModel.displayHomesByCity(binding.homeSearch.text.toString())
+            }
+        }
 
         homeViewModel.getAction()?.observe(viewLifecycleOwner,
             Observer<Action> { action -> action?.let { handleAction(it) } })
@@ -93,7 +98,7 @@ class HomeFragment : Fragment() {
             }
             Action.NETWORK_ERROR ->{
                 if(Application.isActivityVisible()){
-                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"No houses found for this location", Toast.LENGTH_SHORT).show();
                 }
                 swipeContainer.isRefreshing = false
             }
@@ -152,6 +157,9 @@ class MyAdapter(private var myDataset: JSONArray) :
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
+            print("BUNDLE")
+            println(bundle)
+            println(R.id.action_navigation_home_to_oneHomeFragment)
             holder.item.findNavController().navigate(
                 R.id.action_navigation_home_to_oneHomeFragment, bundle)
         }

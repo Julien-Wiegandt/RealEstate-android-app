@@ -44,6 +44,9 @@ import org.json.JSONObject
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -106,6 +109,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             val addresses: List<Address> =
                 geocoder.getFromLocationName(name, 1)
             if (addresses.isNotEmpty()) {
+                //mMap.clear()
                 val latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
                 val markerOptions: MarkerOptions = MarkerOptions()
                 markerOptions.title(name)
@@ -144,12 +148,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                         marker = MarkerOptions()
                             .position(position)
                             .title(obj.get("title").toString())
-                        mMap.addMarker(marker)
+                        mMap.addMarker(marker).tag = obj.get("id");
 
                     }
                 }
                 Action.NETWORK_ERROR -> {
-                    Toast.makeText(context,"An error occurred while requesting for houses", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"No houses found for this location", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -227,13 +231,17 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    /*fun onMarkerClick(marker: Marker): Boolean {
+    fun onMarkerClick(marker: Marker): Boolean {
+        println(marker.tag)
+            /**
         if (marker == myMarker) {
             val uriUrl: Uri = Uri.parse(hashmap.get(myMarker))
             val launchBrowser = Intent(Intent.ACTION_VIEW, id)
             startActivity(launchBrowser)
         }
-    }*/
+        **/
+        return true;
+    }
 
 
     @SuppressLint("MissingPermission")
@@ -248,6 +256,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             mMap.animateCamera(update)
             homeMapViewModel.displayHomesByArea(mMap.myLocation.latitude, mMap.myLocation.longitude)
             false
+        }
+        mMap.setOnMarkerClickListener { marker ->
+            val bundle = bundleOf("id" to marker.tag)
+            findNavController().navigate(
+                R.id.action_navigation_home_to_oneHomeFragment, bundle)
+            true
         }
     }
 

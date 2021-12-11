@@ -37,9 +37,30 @@ class HomeViewModel : ViewModel() {
             override fun onError() {
                 showNetworkError()
             }
+
         }
         ads.getHouses(cb)
 
+    }
+
+    fun displayHomesByCity(city: String){
+        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+            override fun onSuccessObject(result: JSONObject) {
+                homesArray = result.getJSONArray("housings") as JSONArray
+                showDataLoaded()
+            }
+
+            override fun onSuccessArray(result: JSONArray) {
+                homesArray = result
+                showDataLoaded()
+            }
+
+            override fun onError() {
+                showNetworkError()
+            }
+
+        }
+        ads.getHousesByCity(city, cb)
     }
 
     private fun showDataLoaded() {
@@ -49,6 +70,7 @@ class HomeViewModel : ViewModel() {
     private fun showNetworkError() {
         mAction.value = Action(Action.NETWORK_ERROR)
     }
+
 }
 
 class Action(val value: Int) {
