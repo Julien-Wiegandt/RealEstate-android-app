@@ -22,6 +22,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import android.graphics.BitmapFactory
 import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
 import com.example.projetinf717.databinding.FragmentOneAdBinding
 
 import java.io.InputStream
@@ -56,12 +57,20 @@ class OneAdFragment : Fragment() {
 
         oneAdViewModel.displayHome(id)
 
+        binding.deleteButton.setOnClickListener(View.OnClickListener {
+            oneAdViewModel.deleteHousing(id)
+        })
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun deleteAd(){
+
     }
 
     private fun handleAction(action: OneAdAction) {
@@ -87,6 +96,13 @@ class OneAdFragment : Fragment() {
                 if (Application.isActivityVisible()) {
                     Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
                 }
+            }
+            OneAdAction.DELETE_SUCCESS -> {
+                findNavController().navigate(R.id.navigation_ads)
+                Toast.makeText(context, "Housing successfully deleted", Toast.LENGTH_SHORT).show();
+            }
+            OneAdAction.DELETE_ERROR -> {
+                Toast.makeText(context, "Couldn't delete the housing.", Toast.LENGTH_SHORT).show();
             }
         }
     }

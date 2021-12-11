@@ -169,4 +169,23 @@ class Ads {
         queue.add(jsonRequest)
     }
 
+    fun deleteHousing(id : Int, cb : VolleyCallbackAds){
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://" + Application.IP + "/housings/" + id.toString()
+        val jsonObject = JSONObject()
+        val jsonRequest : JsonObjectRequest = object : JsonObjectRequest(
+            Method.DELETE, url, jsonObject,
+            Response.Listener { response -> cb.onSuccessObject(response) },
+            Response.ErrorListener { cb.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
+        queue.add(jsonRequest)
+    }
+
 }

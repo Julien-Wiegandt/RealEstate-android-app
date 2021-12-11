@@ -80,7 +80,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         _binding = FragmentHomeMapBinding.inflate(inflater, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         homeMapViewModel.getAction().observe(viewLifecycleOwner, Observer<Action> { action -> action?.let { handleAction(it) } })
-        checkAndRequestPermissions()
 
         /*binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
@@ -188,59 +187,6 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
 
         // after generating our bitmap we are returning our bitmap.
         return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
-
-    private fun checkAndRequestPermissions(): Boolean {
-        val internet = context?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.INTERNET
-            )
-        }
-        val loc = context?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }
-        val loc2 = context?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        }
-        val listPermissionsNeeded: MutableList<String> = ArrayList()
-        if (internet != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.INTERNET)
-        }
-        if (loc != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (loc2 != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-        if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                (context as Activity?)!!,
-                listPermissionsNeeded.toTypedArray(),
-                1
-            )
-            return false
-        }
-        return true
-    }
-
-
-    fun onMarkerClick(marker: Marker): Boolean {
-        println(marker.tag)
-            /**
-        if (marker == myMarker) {
-            val uriUrl: Uri = Uri.parse(hashmap.get(myMarker))
-            val launchBrowser = Intent(Intent.ACTION_VIEW, id)
-            startActivity(launchBrowser)
-        }
-        **/
-        return true;
     }
 
 

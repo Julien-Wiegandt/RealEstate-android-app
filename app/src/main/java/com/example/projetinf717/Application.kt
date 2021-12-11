@@ -1,16 +1,22 @@
 package com.example.projetinf717
 
+import android.Manifest
+import android.app.Activity
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.projetinf717.data.services.NotificationsService
 import com.example.projetinf717.data.utils.TokenUtils
+import java.util.ArrayList
 import kotlin.random.Random
 
 class Application : Application() {
@@ -82,6 +88,8 @@ class Application : Application() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
+
 
 
 }

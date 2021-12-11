@@ -94,9 +94,10 @@ class NotificationsService : Service() {
 
 
     override fun onDestroy() {
+        println("destroy")
         super.onDestroy()
-        mSocket.disconnect()
-        mSocket.off()
+        /*mSocket.disconnect()
+        mSocket.off()*/
     }
 
 
