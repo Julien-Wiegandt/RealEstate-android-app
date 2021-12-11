@@ -44,6 +44,9 @@ import org.json.JSONObject
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -145,7 +148,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                         marker = MarkerOptions()
                             .position(position)
                             .title(obj.get("title").toString())
-                        mMap.addMarker(marker)
+                        mMap.addMarker(marker).tag = obj.get("id");
 
                     }
                 }
@@ -228,13 +231,17 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    /*fun onMarkerClick(marker: Marker): Boolean {
+    fun onMarkerClick(marker: Marker): Boolean {
+        println(marker.tag)
+            /**
         if (marker == myMarker) {
             val uriUrl: Uri = Uri.parse(hashmap.get(myMarker))
             val launchBrowser = Intent(Intent.ACTION_VIEW, id)
             startActivity(launchBrowser)
         }
-    }*/
+        **/
+        return true;
+    }
 
 
     @SuppressLint("MissingPermission")
@@ -249,6 +256,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             mMap.animateCamera(update)
             homeMapViewModel.displayHomesByArea(mMap.myLocation.latitude, mMap.myLocation.longitude)
             false
+        }
+        mMap.setOnMarkerClickListener { marker ->
+            val bundle = bundleOf("id" to marker.tag)
+            findNavController().navigate(
+                R.id.action_navigation_home_to_oneHomeFragment, bundle)
+            true
         }
     }
 

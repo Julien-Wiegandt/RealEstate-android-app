@@ -158,6 +158,9 @@ class MyAdapter(private var myDataset: JSONArray) :
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
+            print("BUNDLE")
+            println(bundle)
+            println(R.id.action_navigation_home_to_oneHomeFragment)
             holder.item.findNavController().navigate(
                 R.id.action_navigation_home_to_oneHomeFragment, bundle)
         }
