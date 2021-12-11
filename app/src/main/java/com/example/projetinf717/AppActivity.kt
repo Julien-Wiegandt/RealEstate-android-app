@@ -82,7 +82,7 @@ class AppActivity : AppCompatActivity() {
         }
         if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
-                (this)!!,
+                (this),
                 listPermissionsNeeded.toTypedArray(),
                 1
             )

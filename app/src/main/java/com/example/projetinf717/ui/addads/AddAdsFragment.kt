@@ -135,10 +135,13 @@ class AddAdsFragment : Fragment() {
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     val encodedImage: String? = encodeImage(selectedImage)
                     if(encodedImage != null){
+                        binding.createAdsButton.isEnabled = false
                         addAdsViewModel.createAd(housing,encodedImage)
 
                     }
                 }
+            }else{
+                Toast.makeText(context,"No image selected", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -162,12 +165,27 @@ class AddAdsFragment : Fragment() {
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.SHOW_AD_CREATED -> {
+                binding.createAdsButton.isEnabled = true
+                editTextTitle.setText("")
+                editTextStreet.setText("")
+                editTextCity.setText("")
+                editTextPostalCode.setText("")
+                editTextCountry.setText("")
+                editTextDescription.setText("")
+                editTextEstateType.setText("")
+                editTextEstatePrice.setText("")
+                editTextNumberBathroom.setText("")
+                editTextNumberBed.setText("")
+                editTextEmail.setText("")
+                editTextPhone.setText("")
                 Toast.makeText(context,"Ad created", Toast.LENGTH_SHORT).show();
             }
             Action.SHOW_INVALID_FORM -> {
+                binding.createAdsButton.isEnabled = true
                 Toast.makeText(context,"Invalid form", Toast.LENGTH_SHORT).show();
             }
             Action.SHOW_BAD_ADDRESS -> {
+                binding.createAdsButton.isEnabled = true
                 Toast.makeText(context,"This address doesn't exist", Toast.LENGTH_SHORT).show();
             }
 
