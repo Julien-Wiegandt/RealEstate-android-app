@@ -52,6 +52,29 @@ class Ads {
         queue.add(jsonRequest)
     }
 
+    fun getMyHouses(callback: VolleyCallbackAds ){
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://" + Application.IP + "/housings/user"
+
+        val jsonRequest : JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            { response ->
+                callback.onSuccessObject(response)
+            },
+            { err ->
+                callback.onError()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
+        queue.add(jsonRequest)
+    }
+
     fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
         val url = "http://" + Application.IP + "/housings/city/"+city
