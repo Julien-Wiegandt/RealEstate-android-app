@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.home.OneHomeFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ads.OneAdFragment">
 
     <ImageView
         android:id="@+id/adDetailsImage"
@@ -42,22 +42,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adDetailsPrice" />
 
-<!--    Next fav feature-->
-<!--    <ImageButton-->
-<!--        android:id="@+id/adDetailsFavButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:insetTop="0dp"-->
-<!--        android:insetBottom="0dp"-->
-<!--        android:minWidth="48dp"-->
-<!--        android:minHeight="48dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/adDetailsTitle"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/adDetailsImage"-->
-<!--        app:srcCompat="@drawable/fav_icon"-->
-<!--        tools:ignore="SpeakableTextPresentCheck" />-->
+    <!--    Next fav feature-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/adDetailsFavButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:minWidth="48dp"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/adDetailsTitle"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/adDetailsImage"-->
+    <!--        app:srcCompat="@drawable/fav_icon"-->
+    <!--        tools:ignore="SpeakableTextPresentCheck" />-->
 
 
     <ImageView

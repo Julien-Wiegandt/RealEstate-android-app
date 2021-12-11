@@ -1,6 +1,5 @@
 package com.example.projetinf717.ui.ads
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,52 +8,50 @@ import com.example.projetinf717.data.httpServices.VolleyCallbackAds
 import org.json.JSONArray
 import org.json.JSONObject
 
-class AdsViewModel : ViewModel() {
+class OneAdViewModel : ViewModel() {
+    private val mAction: MutableLiveData<OneAdAction> = MutableLiveData<OneAdAction>()
 
-    private val mAction: MutableLiveData<AdAction> = MutableLiveData<AdAction>()
+    var ad = JSONObject()
 
-    var adsArray = JSONArray()
-
-    fun getAction(): LiveData<AdAction> {
+    fun getAction(): LiveData<OneAdAction> {
         return mAction
     }
     private val ads = Ads()
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is ad Fragment"
+        value = "This is home Fragment"
     }
 
-    fun displayAds(){
+    fun displayHome(id : Int){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
-                // Not used
-            }
-            override fun onSuccessArray(result: JSONArray) {
                 if (result != null) {
-                    adsArray = result
+                    ad = result
                 }
                 showDataLoaded()
+            }
+            override fun onSuccessArray(result: JSONArray) {
+                // Not used
             }
             override fun onError() {
                 showNetworkError()
             }
         }
-        ads.getHouses(cb)
-
+        ads.getHouse(cb, id)
     }
 
     private fun showDataLoaded() {
-        mAction.value = AdAction(AdAction.HOMES_LOADED)
-
+        mAction.value = OneAdAction(OneAdAction.HOME_LOADED)
     }
+
     private fun showNetworkError() {
-        mAction.value = AdAction(AdAction.NETWORK_ERROR)
+        mAction.value = OneAdAction(OneAdAction.NETWORK_ERROR)
     }
 }
 
-class AdAction(val value: Int) {
+class OneAdAction(val value: Int) {
     companion object {
-        const val HOMES_LOADED = 0
+        const val HOME_LOADED = 0
         const val NETWORK_ERROR = 1
     }
 }

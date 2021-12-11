@@ -63,7 +63,6 @@ class HomeFragment : Fragment() {
 
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
-
         }
         binding.homeSearchBtn.setOnClickListener {
             if(binding.homeSearch.text.toString().isNotEmpty()){
