@@ -33,6 +33,7 @@ class HomeMapViewModel: ViewModel() {
             override fun onError() {
                 showNetworkError()
             }
+
         }
         ads.getHousesByCity(city, cb)
     }
@@ -52,6 +53,7 @@ class HomeMapViewModel: ViewModel() {
             override fun onError() {
                 showNetworkError()
             }
+
         }
         ads.getHousesArroundMe(latitude,longitude,cb)
     }
@@ -62,4 +64,7 @@ class HomeMapViewModel: ViewModel() {
     private fun showNetworkError() {
         mAction.value = Action(Action.NETWORK_ERROR)
     }
+
+
+
 }

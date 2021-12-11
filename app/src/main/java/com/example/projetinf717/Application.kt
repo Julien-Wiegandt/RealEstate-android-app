@@ -14,9 +14,10 @@ import kotlin.random.Random
 class Application : Application() {
     companion object{
         var IP = "192.168.0.27:3000/api"
+        var IPSocket = IP.split(":")[0]
         var JWT: String? = null
         var appContext: Context? = null
-        var agencyMode = false
+        var allowNotifications = false
         //true = map and false = list
         var homeListOrMap: Boolean = false
         private var idNotifs : Int = 1000
@@ -53,10 +54,10 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        createNotificationChannel()
-        val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        startService(serviceIntent)
+
+        createNotificationChannel()
+
     }
 
 

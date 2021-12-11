@@ -26,14 +26,15 @@ class NotificationsService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-
+        println("SERVICE CREE")
         try {
             val options : IO.Options = IO.Options.builder().setUpgrade(false).build()
-            mSocket = IO.socket("http://"+Application.IP+":8000", options)
+            mSocket = IO.socket("http://"+Application.IPSocket+":8000", options)
         } catch (e: URISyntaxException) {
             print(e)
         }
         mSocket.connect();
+
 
         handler = Handler()
 
@@ -44,24 +45,21 @@ class NotificationsService : Service() {
     }
 
     //example to update
-    private val onResultBet = Emitter.Listener { args ->
+    private val onNewHouse = Emitter.Listener { args ->
         runOnUiThread(Runnable {
-            val json : JSONObject = args[0] as JSONObject
-            val win : Boolean = json.getBoolean("win")
-            val amount : Double = json.getDouble("amount")
-            val title : String
-            val text : String
-            val intent = Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            if(Application.allowNotifications){
+                val json : JSONObject = args[0] as JSONObject
+                val housing : JSONObject= json.getJSONObject("newHousing")
+                val titleHouse : String = housing.getString("title")
+
+                val title : String = "La maison: $titleHouse est en ligne"
+                val text : String = "Une nouvelle maison est en ligne, venez la consulter"
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                createNotification(title,text,intent,Application.getIdNotifParis())
             }
-            if(win){
-                title = "Vous avez gagné votre pari"
-                text = "Vous avez gagné $amount euros"
-            }else{
-                title = "Vous avez perdu votre pari"
-                text = "Vous avez perdu $amount euros"
-            }
-            createNotification(title,text,intent,Application.getIdNotifParis())
+
         })
 
     }
@@ -89,10 +87,8 @@ class NotificationsService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags_: Int, startId: Int): Int {
-        val jsonObj = JSONObject()
-        jsonObj.put("userId",Application.getID())
-        mSocket.emit("login", jsonObj)
-        mSocket.on("newAd",onResultBet)
+        println("SERVICE STARTED")
+        mSocket.on("/housings",onNewHouse)
         return START_STICKY
     }
 

@@ -31,7 +31,7 @@ class Ads {
             { response ->
                 callback.onSuccessObject(response)
             },
-            { err ->
+            { _ ->
                 callback.onError()
             })
         queue.add(jsonRequest)
@@ -46,7 +46,7 @@ class Ads {
             { response ->
                 callback.onSuccessArray(response)
             },
-            { err ->
+            { _ ->
                 callback.onError()
             })
         queue.add(jsonRequest)
@@ -77,9 +77,7 @@ class Ads {
             { response ->
                 callback.onSuccessObject(response)
             },
-            { err ->
-                Toast.makeText(Application.appContext,err.toString(), Toast.LENGTH_SHORT).show();
-
+            { _ ->
                 callback.onError()
             })
         queue.add(jsonRequest)

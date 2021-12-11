@@ -135,7 +135,6 @@ class AddAdsFragment : Fragment() {
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     val encodedImage: String? = encodeImage(selectedImage)
                     if(encodedImage != null){
-                        println("IMAGE ENCODE FRERO")
                         addAdsViewModel.createAd(housing,encodedImage)
 
                     }

@@ -39,10 +39,10 @@ class NotificationsFragment : Fragment() {
 
         binding.profileSwitchAgency.setOnCheckedChangeListener{_, isChecked ->
             if(isChecked){
-                Application.agencyMode = true
+                Application.allowNotifications = true
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)
             }else{
-                Application.agencyMode = false
+                Application.allowNotifications = false
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
             }
         }

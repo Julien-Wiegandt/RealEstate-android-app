@@ -24,34 +24,51 @@ class HomeViewModel : ViewModel() {
     }
 
     fun displayHomes(){
-        Log.d("JU", "displayHomes")
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
                 // Not used
             }
             override fun onSuccessArray(result: JSONArray) {
-                if (result != null) {
-                    Log.d("JU", "homesArray = result")
-                    homesArray = result
-                }
+                homesArray = result
                 showDataLoaded()
             }
             override fun onError() {
                 showNetworkError()
             }
+
         }
         ads.getHouses(cb)
 
     }
 
+    fun displayHomesByCity(city: String){
+        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+            override fun onSuccessObject(result: JSONObject) {
+                homesArray = result.getJSONArray("housings") as JSONArray
+                showDataLoaded()
+            }
+
+            override fun onSuccessArray(result: JSONArray) {
+                homesArray = result
+                showDataLoaded()
+            }
+
+            override fun onError() {
+                showNetworkError()
+            }
+
+        }
+        ads.getHousesByCity(city, cb)
+    }
+
     private fun showDataLoaded() {
-        Log.d("JU", "showDataLoaded")
         mAction.value = Action(Action.HOMES_LOADED)
 
     }
     private fun showNetworkError() {
         mAction.value = Action(Action.NETWORK_ERROR)
     }
+
 }
 
 class Action(val value: Int) {

@@ -106,6 +106,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             val addresses: List<Address> =
                 geocoder.getFromLocationName(name, 1)
             if (addresses.isNotEmpty()) {
+                //mMap.clear()
                 val latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
                 val markerOptions: MarkerOptions = MarkerOptions()
                 markerOptions.title(name)
@@ -149,7 +150,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
                 Action.NETWORK_ERROR -> {
-                    Toast.makeText(context,"An error occurred while requesting for houses", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"No houses found for this location", Toast.LENGTH_SHORT).show();
                 }
             }
 

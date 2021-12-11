@@ -23,7 +23,6 @@ class Authentication() {
                 callbackJsonObject.onSuccess(response)
             },
             {err ->
-                println("hey")
                 println(err)
                 callbackJsonObject.onError()
             })
@@ -39,7 +38,6 @@ class Authentication() {
         jsonObject.put("name",name)
         jsonObject.put("password",password)
         jsonObject.put("repassword",repassword)
-        println(name)
         val jsonRequest = JsonObjectRequest(
             Request.Method.POST, urlRegister, jsonObject,
             { response ->

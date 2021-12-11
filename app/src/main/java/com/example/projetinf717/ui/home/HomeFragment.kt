@@ -65,6 +65,11 @@ class HomeFragment : Fragment() {
             adapter = viewAdapter
 
         }
+        binding.homeSearchBtn.setOnClickListener {
+            if(binding.homeSearch.text.toString().isNotEmpty()){
+                homeViewModel.displayHomesByCity(binding.homeSearch.text.toString())
+            }
+        }
 
         homeViewModel.getAction()?.observe(viewLifecycleOwner,
             Observer<Action> { action -> action?.let { handleAction(it) } })
@@ -95,7 +100,7 @@ class HomeFragment : Fragment() {
             }
             Action.NETWORK_ERROR ->{
                 if(Application.isActivityVisible()){
-                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"No houses found for this location", Toast.LENGTH_SHORT).show();
                 }
                 swipeContainer.isRefreshing = false
             }
