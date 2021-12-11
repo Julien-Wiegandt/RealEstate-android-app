@@ -25,6 +25,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Base64
+import androidx.navigation.fragment.findNavController
 import com.example.projetinf717.classes.Housing
 import com.example.projetinf717.ui.addads.Action
 import com.example.projetinf717.ui.addads.AddAdsViewModel
@@ -179,6 +180,7 @@ class AddAdsFragment : Fragment() {
                 editTextEmail.setText("")
                 editTextPhone.setText("")
                 Toast.makeText(context,"Ad created", Toast.LENGTH_SHORT).show();
+                findNavController().navigate(com.example.projetinf717.R.id.navigation_ads)
             }
             Action.SHOW_INVALID_FORM -> {
                 binding.createAdsButton.isEnabled = true
