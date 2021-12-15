@@ -108,7 +108,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             val addresses: List<Address> =
                 geocoder.getFromLocationName(name, 1)
             if (addresses.isNotEmpty()) {
-                //mMap.clear()
+                mMap.clear()
                 val latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
                 val markerOptions: MarkerOptions = MarkerOptions()
                 markerOptions.title(name)

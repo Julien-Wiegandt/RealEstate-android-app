@@ -33,7 +33,6 @@ class NotificationsService : Service() {
         } catch (e: URISyntaxException) {
             print(e)
         }
-        mSocket.connect();
 
 
         handler = Handler()
@@ -88,6 +87,7 @@ class NotificationsService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags_: Int, startId: Int): Int {
         println("SERVICE STARTED")
+        mSocket.connect();
         mSocket.on("/housings",onNewHouse)
         return START_STICKY
     }
