@@ -15,6 +15,8 @@ The full project report is available [here](./media/Rapport_RealEstate.pdf).
 
 RealEstate is an Android application that manages real estate offers. It uses a full REST API with Express.js in the Node.js environment. We use a Postgres database on AWS, a public image storage API 'imgbb', as well as the Google maps API.
 
+The initial UX/UI design figma prototype is available [here](https://www.figma.com/file/LZ1J2uCwb22phhfIlUMrfm/RealEstate?node-id=0%3A1) _(Julien's work)_.
+
 ### Connection views
 
 <div style="display: flex; justify-content: space-around;">
